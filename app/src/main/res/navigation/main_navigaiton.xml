@@ -6,7 +6,7 @@
 
     <fragment
         android:id="@+id/splashFragment"
-        android:name="com.eneskayiklik.post_it.ui.fragment.splash.SplashFragment"
+        android:name="com.eneskayiklik.post_it.ui.splash.SplashFragment"
         android:label="SplashFragment">
         <action
             android:id="@+id/action_splashFragment_to_notesFragment"
@@ -16,7 +16,7 @@
     </fragment>
     <fragment
         android:id="@+id/notesFragment"
-        android:name="com.eneskayiklik.post_it.ui.fragment.main.NotesFragment"
+        android:name="com.eneskayiklik.post_it.ui.main.NotesFragment"
         android:label="NotesFragment">
         <action
             android:id="@+id/action_notesFragment_to_addNoteFragment"
@@ -27,10 +27,10 @@
     </fragment>
     <fragment
         android:id="@+id/addNoteFragment"
-        android:name="com.eneskayiklik.post_it.ui.fragment.main.AddNoteFragment"
+        android:name="com.eneskayiklik.post_it.ui.main.AddNoteFragment"
         android:label="AddNoteFragment" />
     <fragment
         android:id="@+id/noteDetailFragment"
-        android:name="com.eneskayiklik.post_it.ui.fragment.main.NoteDetailFragment"
+        android:name="com.eneskayiklik.post_it.ui.main.NoteDetailFragment"
         android:label="NoteDetailFragment" />
 </navigation>

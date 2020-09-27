@@ -1,4 +1,4 @@
-package com.eneskayiklik.post_it.ui.fragment.main
+package com.eneskayiklik.post_it.ui.main
 
 import androidx.fragment.app.Fragment
 import com.eneskayiklik.post_it.R
