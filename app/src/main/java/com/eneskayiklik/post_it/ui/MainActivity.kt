@@ -1,7 +1,8 @@
-package com.eneskayiklik.post_it
+package com.eneskayiklik.post_it.ui
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.appcompat.app.AppCompatActivity
+import com.eneskayiklik.post_it.R
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
