@@ -1,7 +1,9 @@
-package com.eneskayiklik.post_it.db
+package com.eneskayiklik.post_it.di
 
 import android.content.Context
 import androidx.room.Room
+import com.eneskayiklik.post_it.db.NoteDao
+import com.eneskayiklik.post_it.db.NoteDatabase
 import com.eneskayiklik.post_it.db.NoteDatabase.Companion.DATABASE_NAME
 import dagger.Module
 import dagger.Provides

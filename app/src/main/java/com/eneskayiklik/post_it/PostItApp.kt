@@ -1,4 +1,4 @@
-package com.eneskayiklik
+package com.eneskayiklik.post_it
 
 import android.app.Application
 import dagger.hilt.android.HiltAndroidApp

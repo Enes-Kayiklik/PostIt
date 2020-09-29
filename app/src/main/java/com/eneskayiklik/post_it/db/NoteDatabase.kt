@@ -2,6 +2,7 @@ package com.eneskayiklik.post_it.db
 
 import androidx.room.Database
 import androidx.room.RoomDatabase
+import com.eneskayiklik.post_it.db.entity.Note
 
 @Database(
     entities = [Note::class],

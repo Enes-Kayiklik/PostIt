@@ -32,5 +32,9 @@
     <fragment
         android:id="@+id/noteDetailFragment"
         android:name="com.eneskayiklik.post_it.ui.main.NoteDetailFragment"
-        android:label="NoteDetailFragment" />
+        android:label="NoteDetailFragment">
+        <argument
+            android:name="currentNote"
+            app:argType="com.eneskayiklik.post_it.db.entity.Note" />
+    </fragment>
 </navigation>

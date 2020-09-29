@@ -5,7 +5,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.eneskayiklik.post_it.db.Note
+import com.eneskayiklik.post_it.db.entity.Note
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
