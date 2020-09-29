@@ -13,4 +13,10 @@ interface NoteDao {
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun addNote(note: Note)
+
+    @Query("DELETE FROM notes")
+    suspend fun deleteAllNotes()
+
+    @Query("SELECT * FROM notes ORDER BY date")
+    fun getAllNotesOrderByDate(): List<Note>
 }

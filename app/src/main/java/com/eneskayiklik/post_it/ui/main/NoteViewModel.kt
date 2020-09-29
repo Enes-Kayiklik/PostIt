@@ -22,6 +22,12 @@ class NoteViewModel @ViewModelInject constructor(
         }
     }
 
+    fun getAllNotesOrderByDate() {
+        viewModelScope.launch(Dispatchers.IO) {
+            _allNotes.postValue(noteRepository.getAllNotesOrderByDate())
+        }
+    }
+
     fun addNote(note: Note) {
         viewModelScope.launch(Dispatchers.IO) {
             noteRepository.addNote(note).also { getAllNotes() }
@@ -31,6 +37,12 @@ class NoteViewModel @ViewModelInject constructor(
     fun deleteNote(note: Note) {
         viewModelScope.launch(Dispatchers.IO) {
             noteRepository.deleteNote(note).also { getAllNotes() }
+        }
+    }
+
+    fun deleteAllNotes() {
+        viewModelScope.launch(Dispatchers.IO) {
+            noteRepository.deleteAllNote().also { getAllNotes() }
         }
     }
 }

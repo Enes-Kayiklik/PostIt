@@ -8,6 +8,8 @@ class MainRepository @Inject constructor(
     private val dao:NoteDao
 ) {
     fun getAllNotes() = dao.getAllNotes()
+    fun getAllNotesOrderByDate() = dao.getAllNotesOrderByDate()
     suspend fun addNote(note: Note) = dao.addNote(note)
     suspend fun deleteNote(note: Note) = dao.deleteNote(note)
+    suspend fun deleteAllNote() = dao.deleteAllNotes()
 }

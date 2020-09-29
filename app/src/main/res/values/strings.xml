@@ -1,6 +1,7 @@
 <resources>
     <string name="app_name">Post-it</string>
     <string name="sort_by">Sort By</string>
-    <string name="sort_by_date">Tarihe Göre</string>
+    <string name="sort_by_date">Sort By Date</string>
     <string name="title">Title</string>
+    <string name="delete_all_notes">Delete All Notes</string>
 </resources>
