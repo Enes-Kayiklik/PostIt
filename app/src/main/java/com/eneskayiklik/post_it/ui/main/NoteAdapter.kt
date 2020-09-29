@@ -41,7 +41,6 @@ class NoteAdapter(
                     .setMessage("Do you want to delete '${noteList[position].title}'")
                     .setPositiveButton("Yes") { _, _ ->
                         noteViewModel.deleteNote(noteList[position])
-                        notifyItemRemoved(position)
                         showSnackbar(it, noteList[position], position)
                     }
                     .setNegativeButton("No") { _, _ ->
@@ -56,7 +55,6 @@ class NoteAdapter(
         Snackbar.make(view, "Deleted succesful", Snackbar.LENGTH_LONG)
             .setAction("Undo") {
                 noteViewModel.addNote(note)
-                notifyDataSetChanged()
             }.show()
     }
 

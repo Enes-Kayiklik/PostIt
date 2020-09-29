@@ -24,13 +24,13 @@ class NoteViewModel @ViewModelInject constructor(
 
     fun addNote(note: Note) {
         viewModelScope.launch(Dispatchers.IO) {
-            noteRepository.addNote(note)
+            noteRepository.addNote(note).also { getAllNotes() }
         }
     }
 
     fun deleteNote(note: Note) {
         viewModelScope.launch(Dispatchers.IO) {
-            noteRepository.deleteNote(note)
+            noteRepository.deleteNote(note).also { getAllNotes() }
         }
     }
 }
