@@ -5,6 +5,7 @@ import android.view.Menu
 import android.view.MenuInflater
 import android.view.MenuItem
 import android.view.View
+import android.widget.Toast
 import androidx.core.widget.doOnTextChanged
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
@@ -12,10 +13,9 @@ import androidx.navigation.fragment.navArgs
 import com.eneskayiklik.post_it.R
 import com.eneskayiklik.post_it.db.entity.Note
 import com.eneskayiklik.post_it.ui.main.notes.NoteViewModel
+import com.eneskayiklik.post_it.util.convertHumanTime
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.fragment_add_note.*
-import java.text.SimpleDateFormat
-import java.util.*
 
 @AndroidEntryPoint
 class AddNoteFragment : Fragment(R.layout.fragment_add_note) {
@@ -24,14 +24,14 @@ class AddNoteFragment : Fragment(R.layout.fragment_add_note) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         setData()
-        setTime()
         setupButtonsOnClick()
         setHasOptionsMenu(true)
     }
 
     private fun setData() {
+        tvDate.text = System.currentTimeMillis().convertHumanTime()
         navArgs.currentNote?.let { currentNote ->
-            tvDate.text = SimpleDateFormat("dd.MM.yyyy HH.mm", Locale.ROOT).format(currentNote.date)
+            tvDate.text = currentNote.date.convertHumanTime()
             edtNoteTitle.setText(currentNote.title)
             edtNote.setText(currentNote.description)
         }
@@ -43,28 +43,26 @@ class AddNoteFragment : Fragment(R.layout.fragment_add_note) {
         }
     }
 
-    private fun addNoteToDb() {
+    private fun saveNote(): Boolean {
         val note = edtNote.text.toString()
-        val time = System.currentTimeMillis()
         val title = edtNoteTitle.text.toString()
 
-        if (note.isNotEmpty() && title.isNotEmpty()) {
+        return if (note.isNotEmpty() && title.isNotEmpty()) {
             noteViewModel.addNote(
                 Note(
                     id = navArgs.currentNote?.id ?: 0,
                     title = title,
                     description = note,
-                    date = time
+                    date = System.currentTimeMillis()
                 )
             )
-
             this.requireActivity().onBackPressed()
+            true
+        } else {
+            Toast.makeText(this.requireContext(), "Input all require data", Toast.LENGTH_SHORT)
+                .show()
+            false
         }
-    }
-
-    private fun setTime() {
-        tvDate.text =
-            SimpleDateFormat("dd.MM.yyyy HH.mm", Locale.ROOT).format(System.currentTimeMillis())
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
@@ -72,10 +70,7 @@ class AddNoteFragment : Fragment(R.layout.fragment_add_note) {
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean = when (item.itemId) {
-        R.id.saveNote -> {
-            addNoteToDb()
-            true
-        }
+        R.id.saveNote -> saveNote()
         else -> super.onOptionsItemSelected(item)
     }
 }

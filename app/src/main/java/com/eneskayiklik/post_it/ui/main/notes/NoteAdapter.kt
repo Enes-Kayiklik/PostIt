@@ -5,63 +5,65 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.navigation.findNavController
+import androidx.recyclerview.widget.DiffUtil
+import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.eneskayiklik.post_it.R
 import com.eneskayiklik.post_it.db.entity.Note
-import com.google.android.material.snackbar.Snackbar
 import kotlinx.android.synthetic.main.one_row_note.view.*
 
 class NoteAdapter(
-    private val noteList: List<Note>,
-    private val noteViewModel: NoteViewModel,
-    private val changeManager: (Int) -> Unit
-) : RecyclerView.Adapter<NoteAdapter.CustomViewHolder>() {
-    override fun getItemCount() = noteList.size
-
+    private val onNoteDeleted: (Note) -> Unit
+) : ListAdapter<Note, NoteAdapter.CustomViewHolder>(CustomCallBack()) {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CustomViewHolder {
         return CustomViewHolder(
             LayoutInflater.from(parent.context)
                 .inflate(R.layout.one_row_note, parent, false)
-        )
+        ) {
+            onNoteDeleted(it)
+        }
     }
 
     override fun onBindViewHolder(holder: CustomViewHolder, position: Int) {
-        holder.itemView.apply {
-            changeManager(position)
-            tvDesc.text = noteList[position].description
-            tvTitle.text = noteList[position].title
+        holder.bind(getItem(position))
+    }
 
-            setOnClickListener {
-                findNavController().navigate(
-                    NotesFragmentDirections.actionNotesFragmentToAddNoteFragment(
-                        noteList[position]
+    class CustomViewHolder(
+        itemView: View,
+        private val onNoteDeleted: (Note) -> Unit
+    ) : RecyclerView.ViewHolder(itemView) {
+        fun bind(note: Note) {
+            itemView.apply {
+                tvDesc.text = note.description
+                tvTitle.text = note.title
+
+                setOnClickListener {
+                    findNavController().navigate(
+                        NotesFragmentDirections.actionNotesFragmentToAddNoteFragment(note)
                     )
-                )
-            }
+                }
 
-            setOnLongClickListener {
-                AlertDialog.Builder(holder.itemView.context)
-                    .setTitle("Delete")
-                    .setMessage("Do you want to delete '${noteList[position].title}'")
-                    .setPositiveButton("Yes") { _, _ ->
-                        noteViewModel.deleteNote(noteList[position])
-                        showSnackbar(it, noteList[position], position)
-                    }
-                    .setNegativeButton("No") { _, _ ->
+                setOnLongClickListener {
+                    AlertDialog.Builder(itemView.context)
+                        .setTitle("Delete")
+                        .setMessage("Do you want to delete '${note.title}'")
+                        .setPositiveButton("Yes") { _, _ ->
+                            onNoteDeleted(note)
+                        }
+                        .setNegativeButton("No") { _, _ ->
 
-                    }.show()
-                true
+                        }.show()
+                    true
+                }
             }
         }
     }
 
-    private fun showSnackbar(view: View, note: Note, position: Int) {
-        Snackbar.make(view, "Deleted succesful", Snackbar.LENGTH_LONG)
-            .setAction("Undo") {
-                noteViewModel.addNote(note)
-            }.show()
+    class CustomCallBack : DiffUtil.ItemCallback<Note>() {
+        override fun areItemsTheSame(oldItem: Note, newItem: Note) =
+            oldItem.id == newItem.id
+
+        override fun areContentsTheSame(oldItem: Note, newItem: Note) =
+            oldItem == newItem
     }
-
-
-    inner class CustomViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView)
 }

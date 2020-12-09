@@ -5,6 +5,7 @@ import android.view.Menu
 import android.view.MenuInflater
 import android.view.View
 import androidx.appcompat.widget.SearchView
+import androidx.coordinatorlayout.widget.CoordinatorLayout
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
@@ -12,6 +13,8 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import com.eneskayiklik.post_it.R
 import com.eneskayiklik.post_it.db.entity.Note
+import com.eneskayiklik.post_it.util.onQueryTextChanged
+import com.google.android.material.snackbar.Snackbar
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.fragment_notes.*
 
@@ -19,9 +22,11 @@ import kotlinx.android.synthetic.main.fragment_notes.*
 class NotesFragment : Fragment(R.layout.fragment_notes) {
     private val noteViewModel: NoteViewModel by viewModels()
     private lateinit var staggeredGrid: StaggeredGridLayoutManager
+    private lateinit var noteAdapter: NoteAdapter
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        setupRecyclerView()
         setupButtonsOnClick()
         setupObserver()
         staggeredGrid = StaggeredGridLayoutManager(
@@ -33,23 +38,36 @@ class NotesFragment : Fragment(R.layout.fragment_notes) {
 
     private fun setupObserver() {
         noteViewModel.notes.observe(viewLifecycleOwner, Observer {
-            setupRecyclerView(it)
+            noteAdapter.submitList(it)
         })
     }
-    private fun setupRecyclerView(noteList: List<Note>) {
+
+    private fun setupRecyclerView() {
+        noteAdapter = NoteAdapter {
+            noteViewModel.deleteNote(it)
+            showSnackbar(it)
+        }
+
         recyclerViewNotes.apply {
-            adapter = NoteAdapter(
-                noteList,
-                noteViewModel
-            ) {
-                if (it == 0)
-                    staggeredGrid.spanCount = 1
-            }
+            adapter = noteAdapter
+            setHasFixedSize(true)
             layoutManager = StaggeredGridLayoutManager(
                 2,
                 StaggeredGridLayoutManager.VERTICAL
             )
         }
+    }
+
+    private fun showSnackbar(note: Note) {
+        val snackbar = Snackbar.make(this.requireView(), "Deleted successful", Snackbar.LENGTH_LONG)
+            .setAction("Undo") {
+                noteViewModel.addNote(note)
+            }
+        val snackbarLayout = snackbar.view as Snackbar.SnackbarLayout
+        val layoutParams = snackbarLayout.layoutParams as CoordinatorLayout.LayoutParams
+        layoutParams.setMargins(32, 0, 32, 32)
+        snackbarLayout.layoutParams = layoutParams
+        snackbar.show()
     }
 
     private fun setupButtonsOnClick() {
@@ -61,13 +79,8 @@ class NotesFragment : Fragment(R.layout.fragment_notes) {
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
         inflater.inflate(R.menu.notes_fragment_menu, menu)
         val searchView = menu.findItem(R.id.searchNote).actionView as SearchView
-        searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
-            override fun onQueryTextSubmit(query: String?) = true
-
-            override fun onQueryTextChange(newText: String?): Boolean {
-                noteViewModel.searchQuery.value = newText.orEmpty()
-                return true
-            }
-        })
+        searchView.onQueryTextChanged {
+            noteViewModel.searchQuery.value = it
+        }
     }
 }
