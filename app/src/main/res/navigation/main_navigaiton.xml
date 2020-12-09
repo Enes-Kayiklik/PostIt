@@ -2,39 +2,28 @@
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/main_navigaiton"
-    app:startDestination="@id/splashFragment">
+    app:startDestination="@id/notesFragment">
 
     <fragment
-        android:id="@+id/splashFragment"
-        android:name="com.eneskayiklik.post_it.ui.splash.SplashFragment"
-        android:label="SplashFragment">
-        <action
-            android:id="@+id/action_splashFragment_to_notesFragment"
-            app:destination="@id/notesFragment"
-            app:popUpTo="@id/splashFragment"
-            app:popUpToInclusive="true" />
-    </fragment>
-    <fragment
         android:id="@+id/notesFragment"
-        android:name="com.eneskayiklik.post_it.ui.main.NotesFragment"
-        android:label="NotesFragment">
+        android:name="com.eneskayiklik.post_it.ui.main.notes.NotesFragment"
+        android:label="Notes">
         <action
             android:id="@+id/action_notesFragment_to_addNoteFragment"
-            app:destination="@id/addNoteFragment" />
-        <action
-            android:id="@+id/action_notesFragment_to_noteDetailFragment"
-            app:destination="@id/noteDetailFragment" />
+            app:destination="@id/addNoteFragment"
+            app:enterAnim="@anim/from_right"
+            app:exitAnim="@anim/to_left"
+            app:popEnterAnim="@anim/from_left"
+            app:popExitAnim="@anim/to_right" />
     </fragment>
     <fragment
         android:id="@+id/addNoteFragment"
-        android:name="com.eneskayiklik.post_it.ui.main.AddNoteFragment"
-        android:label="AddNoteFragment" />
-    <fragment
-        android:id="@+id/noteDetailFragment"
-        android:name="com.eneskayiklik.post_it.ui.main.NoteDetailFragment"
-        android:label="NoteDetailFragment">
+        android:name="com.eneskayiklik.post_it.ui.main.addnote.AddNoteFragment"
+        android:label="Add Note">
         <argument
             android:name="currentNote"
-            app:argType="com.eneskayiklik.post_it.db.entity.Note" />
+            android:defaultValue="@null"
+            app:argType="com.eneskayiklik.post_it.db.entity.Note"
+            app:nullable="true" />
     </fragment>
 </navigation>

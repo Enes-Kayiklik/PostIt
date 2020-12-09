@@ -5,14 +5,14 @@
     android:layout_height="wrap_content"
     android:layout_margin="8dp"
     android:background="@drawable/note_detail_background"
-    android:elevation="8dp"
+    android:elevation="4dp"
     android:padding="8dp">
 
     <TextView
         android:id="@+id/tvTitle"
         style="@style/TextStyle"
-        android:textColor="@color/colorRed"
-        android:textSize="24sp"
+        android:textColor="@color/colorBlack"
+        android:textSize="16sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -20,8 +20,11 @@
     <TextView
         android:id="@+id/tvDesc"
         style="@style/TextStyle"
+        android:layout_marginTop="8dp"
         android:ellipsize="end"
         android:maxLines="7"
+        android:textColor="@color/colorGrey"
+        android:textSize="14sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tvTitle" />

@@ -9,87 +9,59 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="start"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="16dp"
+        android:layout_marginTop="8dp"
         android:text="10.24.2020 10:30"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <TextView
-        android:id="@+id/tvNoteLength"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="end"
-        android:layout_marginEnd="16dp"
-        android:text="0 / 1000"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/edtNoteTitle"
         app:layout_constraintTop_toBottomOf="@+id/edtNoteTitle" />
 
     <EditText
         android:id="@+id/edtNote"
         android:layout_width="0dp"
         android:layout_height="0dp"
+        android:layout_marginTop="16dp"
         android:background="@null"
         android:gravity="start"
-        android:hint="Note"
+        android:hint="@string/note_hint"
         android:inputType="textMultiLine"
         android:maxLength="1000"
-        app:layout_constraintBottom_toTopOf="@+id/btnAdd"
+        android:textSize="14sp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="@+id/edtNoteTitle"
         app:layout_constraintStart_toStartOf="@+id/edtNoteTitle"
-        app:layout_constraintTop_toBottomOf="@+id/tvNoteLength" />
-
-    <ImageView
-        android:id="@+id/btnAdd"
-        android:layout_width="45dp"
-        android:layout_height="45dp"
-        android:layout_marginBottom="16dp"
-        android:src="@drawable/ic_done"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="@+id/edtNote"
-        app:tint="#000" />
-
-    <ImageView
-        android:id="@+id/btnCancel"
-        android:layout_width="45dp"
-        android:layout_height="45dp"
-        android:layout_marginBottom="16dp"
-        android:rotation="45"
-        android:src="@drawable/ic_add"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="@+id/edtNote"
-        app:tint="#000" />
+        app:layout_constraintTop_toBottomOf="@+id/separator" />
 
     <EditText
         android:id="@+id/edtNoteTitle"
         android:layout_width="0dp"
-        android:layout_height="50dp"
+        android:layout_height="40dp"
         android:layout_marginStart="16dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
         android:background="@null"
         android:hint="@string/title"
         android:inputType="textPersonName"
-        android:maxLength="20"
-        app:layout_constraintEnd_toEndOf="@+id/tvDate"
-        app:layout_constraintHorizontal_bias="1.0"
+        android:maxLength="15"
+        android:textSize="16sp"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tvTitleLength" />
-
-    <ImageView
-        android:id="@+id/btnBack"
-        android:layout_width="30dp"
-        android:layout_height="30dp"
-        android:layout_marginStart="16dp"
-        app:layout_constraintBottom_toBottomOf="@+id/tvDate"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/tvDate"
-        app:srcCompat="@drawable/ic_back" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/tvTitleLength"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="0 / 20"
+        android:text="0 / 15"
+        app:layout_constraintBottom_toBottomOf="@+id/edtNoteTitle"
         app:layout_constraintEnd_toEndOf="@+id/edtNoteTitle"
-        app:layout_constraintTop_toBottomOf="@+id/tvDate" />
+        app:layout_constraintTop_toTopOf="@+id/edtNoteTitle" />
 
+    <View
+        android:id="@+id/separator"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginTop="16dp"
+        android:background="@color/colorSeparator"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvDate" />
 </androidx.constraintlayout.widget.ConstraintLayout>

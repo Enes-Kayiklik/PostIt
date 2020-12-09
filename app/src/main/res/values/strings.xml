@@ -4,4 +4,8 @@
     <string name="sort_by_date">Sort By Date</string>
     <string name="title">Title</string>
     <string name="delete_all_notes">Delete All Notes</string>
+    <string name="notes">Notes</string>
+    <string name="save">Save</string>
+    <string name="search">Search</string>
+    <string name="note_hint">Note</string>
 </resources>

@@ -1,4 +1,4 @@
-package com.eneskayiklik.post_it.ui.main
+package com.eneskayiklik.post_it.ui.main.notes
 
 import android.app.AlertDialog
 import android.view.LayoutInflater
@@ -13,7 +13,8 @@ import kotlinx.android.synthetic.main.one_row_note.view.*
 
 class NoteAdapter(
     private val noteList: List<Note>,
-    private val noteViewModel: NoteViewModel
+    private val noteViewModel: NoteViewModel,
+    private val changeManager: (Int) -> Unit
 ) : RecyclerView.Adapter<NoteAdapter.CustomViewHolder>() {
     override fun getItemCount() = noteList.size
 
@@ -26,12 +27,15 @@ class NoteAdapter(
 
     override fun onBindViewHolder(holder: CustomViewHolder, position: Int) {
         holder.itemView.apply {
+            changeManager(position)
             tvDesc.text = noteList[position].description
             tvTitle.text = noteList[position].title
 
             setOnClickListener {
                 findNavController().navigate(
-                    NotesFragmentDirections.actionNotesFragmentToNoteDetailFragment(noteList[position])
+                    NotesFragmentDirections.actionNotesFragmentToAddNoteFragment(
+                        noteList[position]
+                    )
                 )
             }
 
