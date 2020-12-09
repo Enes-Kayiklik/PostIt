@@ -49,7 +49,7 @@ class NoteViewModel @ViewModelInject constructor(
 
     fun deleteNote(note: Note) {
         viewModelScope.launch(Dispatchers.IO) {
-            //noteRepository.deleteNote(note).also { getAllNotes() }
+            noteRepository.deleteNote(note)
         }
     }
 
