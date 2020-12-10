@@ -9,4 +9,6 @@
     <string name="search">Search</string>
     <string name="note_hint">Note</string>
     <string name="empty_note_text">Nothing!\nYour note list is empty.</string>
+    <string name="change_note_type">Change note type</string>
+    <string name="delete">Delete</string>
 </resources>

@@ -12,6 +12,7 @@
         android:layout_marginTop="8dp"
         android:text="10.24.2020 10:30"
         android:paddingStart="16dp"
+        android:paddingEnd="0dp"
         app:layout_constraintStart_toStartOf="@+id/edtNoteTitle"
         app:layout_constraintTop_toBottomOf="@+id/edtNoteTitle" />
 
@@ -82,4 +83,14 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tvDate" />
+
+    <TextView
+        android:id="@+id/btnAddListItem"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Add List Item"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toBottomOf="@+id/tvDate"
+        app:layout_constraintEnd_toEndOf="@+id/edtNoteTitle"
+        app:layout_constraintTop_toTopOf="@+id/tvDate" />
 </androidx.constraintlayout.widget.ConstraintLayout>

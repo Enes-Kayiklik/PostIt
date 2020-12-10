@@ -6,6 +6,7 @@ import android.view.MenuInflater
 import android.view.MenuItem
 import android.view.View
 import android.widget.Toast
+import androidx.core.view.isVisible
 import androidx.core.widget.doOnTextChanged
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
@@ -86,15 +87,17 @@ class AddNoteFragment : Fragment(R.layout.fragment_add_note) {
                 edtNote.makeInvisible()
             }
         }
-        if (todoList.isNotEmpty()) {
-            recyclerViewTodoList.makeVisible()
-            edtNote.makeInvisible()
-        }
+        if (todoList.isNotEmpty())
+            convertLayoutType()
     }
 
     private fun setupButtonsOnClick() {
         edtNoteTitle.doOnTextChanged { text, _, _, _ ->
             tvTitleLength.text = "${text?.length ?: 0}".plus(" / 15")
+        }
+
+        btnAddListItem.setOnClickListener {
+            addTodoListItem()
         }
     }
 
@@ -143,8 +146,21 @@ class AddNoteFragment : Fragment(R.layout.fragment_add_note) {
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean = when (item.itemId) {
         R.id.saveNote -> saveNote()
-        R.id.addNote -> addTodoListItem()
+        R.id.changeNoteType -> convertLayoutType()
         R.id.deleteNote -> deleteCurrentNote(navArgs.currentNote)
         else -> super.onOptionsItemSelected(item)
+    }
+
+    private fun convertLayoutType(): Boolean {
+        if (btnAddListItem.isVisible)
+            todoList.clear()
+                .also { btnAddListItem.makeInvisible(); edtNote.makeVisible(); recyclerViewTodoList.makeInvisible() }
+        else
+            edtNote.setText("").also {
+                btnAddListItem.makeVisible(); edtNote.makeInvisible(); recyclerViewTodoList.makeVisible(); todoList.add(
+                Todo()
+            )
+            }
+        return true
     }
 }
