@@ -12,6 +12,7 @@ import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.navArgs
 import com.eneskayiklik.post_it.R
 import com.eneskayiklik.post_it.db.entity.Note
+import com.eneskayiklik.post_it.db.entity.Todo
 import com.eneskayiklik.post_it.ui.main.notes.NoteViewModel
 import com.eneskayiklik.post_it.util.convertHumanTime
 import dagger.hilt.android.AndroidEntryPoint
@@ -21,6 +22,7 @@ import kotlinx.android.synthetic.main.fragment_add_note.*
 class AddNoteFragment : Fragment(R.layout.fragment_add_note) {
     private val noteViewModel: NoteViewModel by viewModels()
     private val navArgs by navArgs<AddNoteFragmentArgs>()
+    private var todoListAdapter = TodoListAdapter()
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         setData()
@@ -34,7 +36,10 @@ class AddNoteFragment : Fragment(R.layout.fragment_add_note) {
             tvDate.text = currentNote.date.convertHumanTime()
             edtNoteTitle.setText(currentNote.title)
             edtNote.setText(currentNote.description)
+            todoListAdapter.submitList(currentNote.todoList)
+            tvTitleLength.text = "${currentNote.title.length}".plus(" / 15")
         }
+        recyclerViewTodoList.adapter = todoListAdapter
     }
 
     private fun setupButtonsOnClick() {
@@ -53,7 +58,8 @@ class AddNoteFragment : Fragment(R.layout.fragment_add_note) {
                     id = navArgs.currentNote?.id ?: 0,
                     title = title,
                     description = note,
-                    date = System.currentTimeMillis()
+                    date = System.currentTimeMillis(),
+                    todoList = todoListAdapter.currentList.filter { it.title.isNotEmpty() }
                 )
             )
             this.requireActivity().onBackPressed()
@@ -65,12 +71,29 @@ class AddNoteFragment : Fragment(R.layout.fragment_add_note) {
         }
     }
 
+    private fun addTodoListItem(): Boolean {
+        val list = todoListAdapter.currentList.toMutableSet()
+        list.add(Todo())
+        todoListAdapter.submitList(list.toList())
+        return true
+    }
+
+    private fun deleteCurrentNote(note: Note?): Boolean {
+        note?.let {
+            noteViewModel.deleteNote(it)
+        }
+        this.requireActivity().onBackPressed()
+        return true
+    }
+
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
         inflater.inflate(R.menu.add_note_menu, menu)
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean = when (item.itemId) {
         R.id.saveNote -> saveNote()
+        R.id.addNote -> addTodoListItem()
+        R.id.deleteNote -> deleteCurrentNote(navArgs.currentNote)
         else -> super.onOptionsItemSelected(item)
     }
 }

@@ -6,4 +6,15 @@
         android:icon="@drawable/ic_check"
         android:title="@string/save"
         app:showAsAction="always" />
+
+    <item
+        android:id="@+id/deleteNote"
+        android:icon="@drawable/ic_delete"
+        android:title="Delete"
+        app:showAsAction="ifRoom" />
+
+    <item
+        android:id="@+id/addNote"
+        android:title="Add"
+        app:showAsAction="ifRoom" />
 </menu>
