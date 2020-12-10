@@ -4,15 +4,17 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="horizontal"
-    android:layout_marginStart="8dp">
+    android:layout_marginStart="8dp"
+    android:background="@color/colorWhite">
 
     <CheckBox
         android:id="@+id/checkBoxTodoIsDone"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:minWidth="0dp"
         android:minHeight="0dp"
         app:layout_constraintStart_toStartOf="parent"
+        android:layout_weight="10"
         app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
@@ -29,5 +31,13 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/checkBox"
         app:layout_constraintTop_toTopOf="@+id/checkBox"
+        android:layout_weight="2"
         app:layout_constraintVertical_bias="1.0" />
+
+    <ImageView
+        android:id="@+id/btnHandleDrag"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="10"
+        android:src="@drawable/ic_drag_handle" />
 </LinearLayout>

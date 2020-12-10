@@ -10,6 +10,8 @@ import androidx.core.widget.doOnTextChanged
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.navArgs
+import androidx.recyclerview.widget.ItemTouchHelper
+import androidx.recyclerview.widget.RecyclerView
 import com.eneskayiklik.post_it.R
 import com.eneskayiklik.post_it.db.entity.Note
 import com.eneskayiklik.post_it.db.entity.Todo
@@ -19,34 +21,75 @@ import com.eneskayiklik.post_it.util.makeInvisible
 import com.eneskayiklik.post_it.util.makeVisible
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.fragment_add_note.*
+import java.util.*
 
 @AndroidEntryPoint
 class AddNoteFragment : Fragment(R.layout.fragment_add_note) {
     private val noteViewModel: NoteViewModel by viewModels()
     private val navArgs by navArgs<AddNoteFragmentArgs>()
     private var todoListAdapter = TodoListAdapter()
+    var todoList: MutableList<Todo> = mutableListOf()
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         setData()
+        setupRecyclerView()
         setupButtonsOnClick()
         setHasOptionsMenu(true)
+    }
+
+    private fun setupRecyclerView() {
+        todoListAdapter.submitList(todoList)
+        recyclerViewTodoList.adapter = todoListAdapter
+        ItemTouchHelper(object : ItemTouchHelper.SimpleCallback(
+            ItemTouchHelper.UP or ItemTouchHelper.DOWN or
+                    ItemTouchHelper.START or ItemTouchHelper.END,
+            0
+        ) {
+
+            override fun getMovementFlags(
+                recyclerView: RecyclerView,
+                viewHolder: RecyclerView.ViewHolder
+            ): Int {
+                val drag = ItemTouchHelper.UP or ItemTouchHelper.DOWN
+                val swipe = ItemTouchHelper.START or ItemTouchHelper.END
+                return ItemTouchHelper.Callback.makeMovementFlags(drag, swipe)
+            }
+
+            override fun onMove(
+                recyclerView: RecyclerView,
+                viewHolder: RecyclerView.ViewHolder,
+                target: RecyclerView.ViewHolder
+            ): Boolean {
+                Collections.swap(todoList, viewHolder.adapterPosition, target.adapterPosition)
+                todoListAdapter.notifyItemMoved(viewHolder.adapterPosition, target.adapterPosition)
+                return true
+            }
+
+            override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
+                todoList.removeAt(viewHolder.adapterPosition)
+                todoListAdapter.notifyItemRemoved(viewHolder.adapterPosition)
+                todoListAdapter.notifyItemRangeChanged(viewHolder.adapterPosition, todoList.size)
+            }
+        }).attachToRecyclerView(recyclerViewTodoList)
     }
 
     private fun setData() {
         tvDate.text = System.currentTimeMillis().convertHumanTime()
         navArgs.currentNote?.let { currentNote ->
+            todoList = currentNote.todoList.toMutableList()
             tvDate.text = currentNote.date.convertHumanTime()
             edtNoteTitle.setText(currentNote.title)
             edtNote.setText(currentNote.description)
-            todoListAdapter.submitList(currentNote.todoList)
             tvTitleLength.text = "${currentNote.title.length}".plus(" / 15")
             if (todoListAdapter.currentList.isNotEmpty()) {
                 recyclerViewTodoList.makeVisible()
                 edtNote.makeInvisible()
             }
-
         }
-        recyclerViewTodoList.adapter = todoListAdapter
+        if (todoList.isNotEmpty()) {
+            recyclerViewTodoList.makeVisible()
+            edtNote.makeInvisible()
+        }
     }
 
     private fun setupButtonsOnClick() {
@@ -79,9 +122,8 @@ class AddNoteFragment : Fragment(R.layout.fragment_add_note) {
     }
 
     private fun addTodoListItem(): Boolean {
-        val list = todoListAdapter.currentList.toMutableList()
-        list.add(Todo())
-        todoListAdapter.submitList(list.toList())
+        todoList.add(Todo())
+        todoListAdapter.notifyItemInserted(todoList.size - 1)
         recyclerViewTodoList.makeVisible()
         edtNote.makeInvisible()
         return true

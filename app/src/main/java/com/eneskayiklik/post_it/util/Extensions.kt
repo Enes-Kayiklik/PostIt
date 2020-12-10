@@ -1,5 +1,6 @@
 package com.eneskayiklik.post_it.util
 
+import android.util.Log
 import android.view.View
 import androidx.appcompat.widget.SearchView
 import java.text.SimpleDateFormat
@@ -20,6 +21,18 @@ inline fun SearchView.onQueryTextChanged(crossinline listener: (String) -> Unit)
             return true
         }
     })
+}
+
+fun <T> MutableList<T>.moveItem(
+    from: Int,
+    to: Int,
+    item: T
+): Boolean {
+    Log.e("TAG", "FROM -> $from TO -> $to ITEM -> $item")
+    this.add(to, item)
+    this.removeAt(from)
+    Log.e("TAG", "$this")
+    return true
 }
 
 fun View.makeVisible() {
