@@ -9,9 +9,10 @@ class NoteRepository @Inject constructor(
     private val dao: NoteDao
 ) {
     fun getAllNotes(searchQuery: String): Flow<List<Note>> = dao.getAllNotes(searchQuery)
-    fun getAllNotesOrderByDate() = dao.getAllNotesOrderByDate()
+
     suspend fun addNote(note: Note) = dao.addNote(note)
-    suspend fun updateNote(note: Note) = dao.updateNote(note)
+
     suspend fun deleteNote(note: Note) = dao.deleteNote(note)
+
     suspend fun deleteAllNote() = dao.deleteAllNotes()
 }

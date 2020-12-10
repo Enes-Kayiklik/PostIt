@@ -15,6 +15,8 @@ import com.eneskayiklik.post_it.db.entity.Note
 import com.eneskayiklik.post_it.db.entity.Todo
 import com.eneskayiklik.post_it.ui.main.notes.NoteViewModel
 import com.eneskayiklik.post_it.util.convertHumanTime
+import com.eneskayiklik.post_it.util.makeInvisible
+import com.eneskayiklik.post_it.util.makeVisible
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.fragment_add_note.*
 
@@ -38,6 +40,11 @@ class AddNoteFragment : Fragment(R.layout.fragment_add_note) {
             edtNote.setText(currentNote.description)
             todoListAdapter.submitList(currentNote.todoList)
             tvTitleLength.text = "${currentNote.title.length}".plus(" / 15")
+            if (todoListAdapter.currentList.isNotEmpty()) {
+                recyclerViewTodoList.makeVisible()
+                edtNote.makeInvisible()
+            }
+
         }
         recyclerViewTodoList.adapter = todoListAdapter
     }
@@ -52,7 +59,7 @@ class AddNoteFragment : Fragment(R.layout.fragment_add_note) {
         val note = edtNote.text.toString()
         val title = edtNoteTitle.text.toString()
 
-        return if (note.isNotEmpty() && title.isNotEmpty()) {
+        return if (title.isNotEmpty() && (note.isNotEmpty() || todoListAdapter.currentList.isNotEmpty())) {
             noteViewModel.addNote(
                 Note(
                     id = navArgs.currentNote?.id ?: 0,
@@ -72,9 +79,11 @@ class AddNoteFragment : Fragment(R.layout.fragment_add_note) {
     }
 
     private fun addTodoListItem(): Boolean {
-        val list = todoListAdapter.currentList.toMutableSet()
+        val list = todoListAdapter.currentList.toMutableList()
         list.add(Todo())
         todoListAdapter.submitList(list.toList())
+        recyclerViewTodoList.makeVisible()
+        edtNote.makeInvisible()
         return true
     }
 

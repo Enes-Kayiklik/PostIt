@@ -1,5 +1,6 @@
 package com.eneskayiklik.post_it.util
 
+import android.view.View
 import androidx.appcompat.widget.SearchView
 import java.text.SimpleDateFormat
 import java.util.*
@@ -19,4 +20,12 @@ inline fun SearchView.onQueryTextChanged(crossinline listener: (String) -> Unit)
             return true
         }
     })
+}
+
+fun View.makeVisible() {
+    this.visibility = View.VISIBLE
+}
+
+fun View.makeInvisible() {
+    this.visibility = View.GONE
 }

@@ -3,6 +3,7 @@ package com.eneskayiklik.post_it.ui.main.notes
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuInflater
+import android.view.MenuItem
 import android.view.View
 import androidx.appcompat.widget.SearchView
 import androidx.coordinatorlayout.widget.CoordinatorLayout
@@ -13,6 +14,8 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import com.eneskayiklik.post_it.R
 import com.eneskayiklik.post_it.db.entity.Note
+import com.eneskayiklik.post_it.util.makeInvisible
+import com.eneskayiklik.post_it.util.makeVisible
 import com.eneskayiklik.post_it.util.onQueryTextChanged
 import com.google.android.material.snackbar.Snackbar
 import dagger.hilt.android.AndroidEntryPoint
@@ -38,6 +41,7 @@ class NotesFragment : Fragment(R.layout.fragment_notes) {
 
     private fun setupObserver() {
         noteViewModel.notes.observe(viewLifecycleOwner, Observer {
+            if (it.isEmpty()) emptyNoteLayout.makeVisible() else emptyNoteLayout.makeInvisible()
             noteAdapter.submitList(it)
         })
     }
@@ -82,5 +86,13 @@ class NotesFragment : Fragment(R.layout.fragment_notes) {
         searchView.onQueryTextChanged {
             noteViewModel.searchQuery.value = it
         }
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean = when (item.itemId) {
+        R.id.deleteAllNotes -> {
+            noteViewModel.deleteAllNotes()
+            true
+        }
+        else -> false
     }
 }
