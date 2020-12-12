@@ -10,8 +10,8 @@ import kotlinx.android.parcel.Parcelize
 data class Note(
     @PrimaryKey(autoGenerate = true)
     val id: Int = 0,
-    val title: String,
-    val description: String,
-    val date: Long,
+    val title: String = "",
+    val description: String = "",
+    val date: Long = 0L,
     val todoList: List<Todo> = emptyList()
 ) : Parcelable

@@ -1,12 +1,13 @@
 package com.eneskayiklik.post_it.ui.main.addnote
 
+import android.app.AlertDialog
 import android.os.Bundle
+import android.util.Log
 import android.view.Menu
 import android.view.MenuInflater
 import android.view.MenuItem
 import android.view.View
 import android.widget.Toast
-import androidx.core.view.isVisible
 import androidx.core.widget.doOnTextChanged
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
@@ -17,25 +18,36 @@ import com.eneskayiklik.post_it.R
 import com.eneskayiklik.post_it.db.entity.Note
 import com.eneskayiklik.post_it.db.entity.Todo
 import com.eneskayiklik.post_it.ui.main.notes.NoteViewModel
-import com.eneskayiklik.post_it.util.convertHumanTime
-import com.eneskayiklik.post_it.util.makeInvisible
-import com.eneskayiklik.post_it.util.makeVisible
+import com.eneskayiklik.post_it.util.*
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.fragment_add_note.*
 import java.util.*
 
 @AndroidEntryPoint
-class AddNoteFragment : Fragment(R.layout.fragment_add_note) {
+class AddNoteFragment : Fragment(R.layout.fragment_add_note), TodoListAdapter.OnItemCheckedChange {
     private val noteViewModel: NoteViewModel by viewModels()
     private val navArgs by navArgs<AddNoteFragmentArgs>()
-    private var todoListAdapter = TodoListAdapter()
+    private var todoListAdapter = TodoListAdapter(this)
+    private var layoutType = LayoutType.NOTE
     var todoList: MutableList<Todo> = mutableListOf()
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        setData()
-        setupRecyclerView()
+        setLayoutTypeForFirstTime()
         setupButtonsOnClick()
         setHasOptionsMenu(true)
+    }
+
+    private fun setLayoutTypeForFirstTime() {
+        navArgs.currentNote?.let {
+            setData(it)
+            if (it.todoList.isNotEmpty()) {
+                todoList = it.todoList.toMutableList()
+                layoutType = LayoutType.LIST
+                convertLayoutType()
+            } else {
+                edtNote.setText(it.description)
+            }
+        }
     }
 
     private fun setupRecyclerView() {
@@ -46,7 +58,6 @@ class AddNoteFragment : Fragment(R.layout.fragment_add_note) {
                     ItemTouchHelper.START or ItemTouchHelper.END,
             0
         ) {
-
             override fun getMovementFlags(
                 recyclerView: RecyclerView,
                 viewHolder: RecyclerView.ViewHolder
@@ -61,39 +72,41 @@ class AddNoteFragment : Fragment(R.layout.fragment_add_note) {
                 viewHolder: RecyclerView.ViewHolder,
                 target: RecyclerView.ViewHolder
             ): Boolean {
-                Collections.swap(todoList, viewHolder.adapterPosition, target.adapterPosition)
+                if (viewHolder.adapterPosition < target.adapterPosition) {
+                    for (i in viewHolder.adapterPosition until target.adapterPosition) {
+                        Collections.swap(todoList, i, i + 1)
+                    }
+                } else {
+                    for (i in viewHolder.adapterPosition downTo target.adapterPosition + 1) {
+                        Collections.swap(todoList, i, i - 1)
+                    }
+                }
                 todoListAdapter.notifyItemMoved(viewHolder.adapterPosition, target.adapterPosition)
+                Log.e("TAG  List -> ", "${todoList.joinToString { it.title }}")
                 return true
             }
 
             override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
                 todoList.removeAt(viewHolder.adapterPosition)
-                todoListAdapter.notifyItemRemoved(viewHolder.adapterPosition)
                 todoListAdapter.notifyItemRangeChanged(viewHolder.adapterPosition, todoList.size)
+                todoListAdapter.notifyItemRemoved(viewHolder.adapterPosition)
             }
         }).attachToRecyclerView(recyclerViewTodoList)
     }
 
-    private fun setData() {
-        tvDate.text = System.currentTimeMillis().convertHumanTime()
-        navArgs.currentNote?.let { currentNote ->
-            todoList = currentNote.todoList.toMutableList()
-            tvDate.text = currentNote.date.convertHumanTime()
-            edtNoteTitle.setText(currentNote.title)
-            edtNote.setText(currentNote.description)
-            tvTitleLength.text = "${currentNote.title.length}".plus(" / 15")
-            if (todoListAdapter.currentList.isNotEmpty()) {
-                recyclerViewTodoList.makeVisible()
-                edtNote.makeInvisible()
-            }
-        }
-        if (todoList.isNotEmpty())
-            convertLayoutType()
+    private fun setData(note: Note) {
+        tvDate.text = note.date.convertHumanTime()
+        edtNoteTitle.setText(note.title)
+        tvTitleLength.text = "${note.title.length}".plus(" / 15")
     }
 
     private fun setupButtonsOnClick() {
         edtNoteTitle.doOnTextChanged { text, _, _, _ ->
             tvTitleLength.text = "${text?.length ?: 0}".plus(" / 15")
+        }
+
+        edtNote.doOnTextChanged { text, _, _, _ ->
+            //updateNote()
         }
 
         btnAddListItem.setOnClickListener {
@@ -124,19 +137,43 @@ class AddNoteFragment : Fragment(R.layout.fragment_add_note) {
         }
     }
 
-    private fun addTodoListItem(): Boolean {
+    private fun addTodoListItem() {
         todoList.add(Todo())
         todoListAdapter.notifyItemInserted(todoList.size - 1)
-        recyclerViewTodoList.makeVisible()
+    }
+
+    private fun convertLayoutType() {
+        when (layoutType) {
+            LayoutType.LIST -> listLayout().also { setupRecyclerView(); addTodoListItem() }
+            LayoutType.NOTE -> noteLayout().also { todoList.clear() }
+        }
+    }
+
+    private fun noteLayout() {
+        edtNote.makeVisible()
+        recyclerViewTodoList.makeInvisible()
+        btnAddListItem.makeInvisible()
+    }
+
+    private fun listLayout() {
         edtNote.makeInvisible()
-        return true
+        recyclerViewTodoList.makeVisible()
+        btnAddListItem.makeVisible()
     }
 
     private fun deleteCurrentNote(note: Note?): Boolean {
-        note?.let {
-            noteViewModel.deleteNote(it)
-        }
-        this.requireActivity().onBackPressed()
+        AlertDialog.Builder(this.requireContext())
+            .setTitle(R.string.delete)
+            .setMessage(
+                resources.getString(R.string.delete_note_text).plus(" '${note?.title ?: ""}' ?")
+            )
+            .setPositiveButton(R.string.yes) { _, _ ->
+                note?.let {
+                    noteViewModel.deleteNote(it)
+                }
+                this.requireActivity().onBackPressed()
+            }
+            .setNegativeButton(R.string.no) { _, _ -> }.show()
         return true
     }
 
@@ -146,21 +183,17 @@ class AddNoteFragment : Fragment(R.layout.fragment_add_note) {
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean = when (item.itemId) {
         R.id.saveNote -> saveNote()
-        R.id.changeNoteType -> convertLayoutType()
+        R.id.changeNoteType -> {
+            layoutType = layoutType.changeLayoutType()
+            convertLayoutType()
+            true
+        }
         R.id.deleteNote -> deleteCurrentNote(navArgs.currentNote)
         else -> super.onOptionsItemSelected(item)
     }
 
-    private fun convertLayoutType(): Boolean {
-        if (btnAddListItem.isVisible)
-            todoList.clear()
-                .also { btnAddListItem.makeInvisible(); edtNote.makeVisible(); recyclerViewTodoList.makeInvisible() }
-        else
-            edtNote.setText("").also {
-                btnAddListItem.makeVisible(); edtNote.makeInvisible(); recyclerViewTodoList.makeVisible(); todoList.add(
-                Todo()
-            )
-            }
-        return true
+    override fun onItemCheckedChange(todo: Todo, isChecked: Boolean, position: Int) {
+        if (todoList.isNotEmpty())
+            todoList[position].isDone = isChecked
     }
 }

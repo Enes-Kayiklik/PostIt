@@ -1,5 +1,6 @@
 package com.eneskayiklik.post_it.ui.main.notes
 
+import android.app.AlertDialog
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuInflater
@@ -22,7 +23,7 @@ import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.fragment_notes.*
 
 @AndroidEntryPoint
-class NotesFragment : Fragment(R.layout.fragment_notes) {
+class NotesFragment : Fragment(R.layout.fragment_notes), NoteAdapter.OnItemClickListener {
     private val noteViewModel: NoteViewModel by viewModels()
     private lateinit var staggeredGrid: StaggeredGridLayoutManager
     private lateinit var noteAdapter: NoteAdapter
@@ -47,10 +48,7 @@ class NotesFragment : Fragment(R.layout.fragment_notes) {
     }
 
     private fun setupRecyclerView() {
-        noteAdapter = NoteAdapter {
-            noteViewModel.deleteNote(it)
-            showSnackbar(it)
-        }
+        noteAdapter = NoteAdapter(this)
 
         recyclerViewNotes.apply {
             adapter = noteAdapter
@@ -74,6 +72,17 @@ class NotesFragment : Fragment(R.layout.fragment_notes) {
         snackbar.show()
     }
 
+    private fun deleteAllNotes(): Boolean {
+        AlertDialog.Builder(this.requireContext())
+            .setTitle(R.string.delete)
+            .setMessage(R.string.delete_all_notes_text)
+            .setPositiveButton(R.string.yes) { _, _ ->
+                noteViewModel.deleteAllNotes()
+            }
+            .setNegativeButton(R.string.no) { _, _ -> }.show()
+        return true
+    }
+
     private fun setupButtonsOnClick() {
         btnAddNote.setOnClickListener {
             findNavController().navigate(R.id.action_notesFragment_to_addNoteFragment)
@@ -89,10 +98,24 @@ class NotesFragment : Fragment(R.layout.fragment_notes) {
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean = when (item.itemId) {
-        R.id.deleteAllNotes -> {
-            noteViewModel.deleteAllNotes()
-            true
-        }
+        R.id.deleteAllNotes -> deleteAllNotes()
         else -> false
+    }
+
+    override fun onItemLongClicked(note: Note) {
+        AlertDialog.Builder(this.requireContext())
+            .setTitle(R.string.delete)
+            .setMessage(resources.getString(R.string.delete_note_text).plus(" '${note.title} ?"))
+            .setPositiveButton(R.string.yes) { _, _ ->
+                noteViewModel.deleteNote(note)
+                showSnackbar(note)
+            }
+            .setNegativeButton(R.string.no) { _, _ -> }.show()
+    }
+
+    override fun onItemClicked(note: Note) {
+        findNavController().navigate(
+            NotesFragmentDirections.actionNotesFragmentToAddNoteFragment(note)
+        )
     }
 }

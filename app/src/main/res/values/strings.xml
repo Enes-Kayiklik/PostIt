@@ -1,14 +1,23 @@
 <resources>
     <string name="app_name">Post-it</string>
+
     <string name="sort_by">Sort By</string>
     <string name="sort_by_date">Sort By Date</string>
-    <string name="title">Title</string>
     <string name="delete_all_notes">Delete All Notes</string>
+
+    <string name="note_hint">Note</string>
+    <string name="title">Title</string>
+
     <string name="notes">Notes</string>
     <string name="save">Save</string>
     <string name="search">Search</string>
-    <string name="note_hint">Note</string>
-    <string name="empty_note_text">Nothing!\nYour note list is empty.</string>
     <string name="change_note_type">Change note type</string>
+
+    <string name="empty_note_text">Nothing!\nYour note list is empty.</string>
     <string name="delete">Delete</string>
+    <string name="yes">Yes</string>
+    <string name="no">No</string>
+    <string name="delete_all_notes_text">Do you want to delete all notes ?</string>
+    <string name="delete_note_text">Do you want to delete</string>
+
 </resources>

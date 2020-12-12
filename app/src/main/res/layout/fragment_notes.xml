@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_height="match_parent">
 
     <androidx.recyclerview.widget.RecyclerView
@@ -15,7 +16,10 @@
         android:layout_gravity="bottom|end"
         android:layout_marginEnd="16dp"
         android:layout_marginBottom="16dp"
+        android:backgroundTint="@color/colorAccent"
+        app:layout_behavior=".util.FabBehavior"
         android:contentDescription="@string/app_name"
+        app:tint="@color/colorWhite"
         android:src="@drawable/ic_add" />
 
     <LinearLayout

@@ -9,6 +9,9 @@ interface NoteDao {
     @Query("SELECT * FROM notes WHERE title LIKE '%' || :searchQuery || '%'")
     fun getAllNotes(searchQuery: String): Flow<List<Note>>
 
+    @Query("SELECT * FROM notes WHERE id==:id")
+    fun getCurrentNote(id: Int): Flow<Note>
+
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun addNote(note: Note)
 

@@ -14,11 +14,10 @@ class NoteViewModel @ViewModelInject constructor(
     private val noteRepository: NoteRepository
 ): ViewModel() {
     var searchQuery = MutableStateFlow("")
-    private val flows = searchQuery.flatMapLatest {
+    private val searchFlows = searchQuery.flatMapLatest {
         noteRepository.getAllNotes(it)
     }
-
-    var notes = flows.asLiveData()
+    var notes = searchFlows.asLiveData()
 
     fun addNote(note: Note) {
         viewModelScope.launch(Dispatchers.IO) {
