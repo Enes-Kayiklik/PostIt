@@ -21,5 +21,8 @@
     <string name="delete_note_text">Do you want to delete</string>
     <string name="export_data">Export Data</string>
     <string name="import_data">Import Data</string>
+    <string name="export_file_name">Export Backup.json</string>
+    <string name="undo">Undo</string>
+    <string name="deleted_successful">Deleted successful</string>
 
 </resources>

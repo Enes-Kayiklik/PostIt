@@ -61,10 +61,11 @@ class NotesFragment : Fragment(R.layout.fragment_notes), NoteAdapter.OnItemClick
     }
 
     private fun showSnackbar(note: Note) {
-        val snackbar = Snackbar.make(this.requireView(), "Deleted successful", Snackbar.LENGTH_LONG)
-            .setAction("Undo") {
-                noteViewModel.addNote(note)
-            }
+        val snackbar =
+            Snackbar.make(this.requireView(), R.string.deleted_successful, Snackbar.LENGTH_LONG)
+                .setAction(R.string.undo) {
+                    noteViewModel.addNote(note)
+                }
         val snackbarLayout = snackbar.view as Snackbar.SnackbarLayout
         val layoutParams = snackbarLayout.layoutParams as CoordinatorLayout.LayoutParams
         layoutParams.setMargins(32, 0, 32, 32)
