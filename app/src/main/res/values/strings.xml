@@ -19,5 +19,7 @@
     <string name="no">No</string>
     <string name="delete_all_notes_text">Do you want to delete all notes ?</string>
     <string name="delete_note_text">Do you want to delete</string>
+    <string name="export_data">Export Data</string>
+    <string name="import_data">Import Data</string>
 
 </resources>

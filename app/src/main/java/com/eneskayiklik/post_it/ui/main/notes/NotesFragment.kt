@@ -42,7 +42,7 @@ class NotesFragment : Fragment(R.layout.fragment_notes), NoteAdapter.OnItemClick
 
     private fun setupObserver() {
         noteViewModel.notes.observe(viewLifecycleOwner, Observer {
-            if (it.isEmpty()) emptyNoteLayout.makeVisible() else emptyNoteLayout.makeInvisible()
+            if (it.isEmpty()) emptyNote.makeVisible() else emptyNote.makeInvisible()
             noteAdapter.submitList(it)
         })
     }

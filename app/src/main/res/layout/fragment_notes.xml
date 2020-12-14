@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
+<androidx.coordinatorlayout.widget.CoordinatorLayout android:layout_width="match_parent"
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_height="match_parent">
 
@@ -13,36 +13,15 @@
         android:id="@+id/btnAddNote"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="bottom|end"
-        android:layout_marginEnd="16dp"
-        android:layout_marginBottom="16dp"
+        android:layout_gravity="end|bottom"
+        android:layout_margin="@dimen/margin_fab"
+        android:contentDescription="@string/app_name"
+        android:src="@drawable/ic_add"
         android:backgroundTint="@color/colorAccent"
         app:layout_behavior=".util.FabBehavior"
-        android:contentDescription="@string/app_name"
-        app:tint="@color/colorWhite"
-        android:src="@drawable/ic_add" />
+        app:tint="@color/colorWhite" />
 
-    <LinearLayout
-        android:id="@+id/emptyNoteLayout"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:gravity="center"
-        android:orientation="vertical"
-        android:visibility="gone">
-
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/ic_empty_note" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="24dp"
-            android:gravity="center"
-            android:text="@string/empty_note_text"
-            android:textSize="24sp" />
-    </LinearLayout>
-
+    <include
+        android:id="@+id/emptyNote"
+        layout="@layout/empty_note_layout" />
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
