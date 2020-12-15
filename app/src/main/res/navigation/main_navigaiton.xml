@@ -26,4 +26,8 @@
             app:argType="com.eneskayiklik.post_it.db.entity.Note"
             app:nullable="true" />
     </fragment>
+    <fragment
+        android:id="@+id/settingsFragment"
+        android:name="com.eneskayiklik.post_it.ui.settings.SettingsFragment"
+        android:label="SettingsFragment" />
 </navigation>

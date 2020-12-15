@@ -9,13 +9,11 @@ import androidx.core.view.GravityCompat
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.lifecycle.Observer
 import androidx.navigation.findNavController
-import androidx.navigation.ui.setupActionBarWithNavController
+import androidx.navigation.ui.setupWithNavController
 import com.eneskayiklik.post_it.R
 import com.eneskayiklik.post_it.helper.Exporter
 import com.eneskayiklik.post_it.ui.main.notes.NoteViewModel
 import com.eneskayiklik.post_it.util.Constants
-import com.eneskayiklik.post_it.util.makeInvisible
-import com.eneskayiklik.post_it.util.makeVisible
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.app_bar_layout.*
@@ -24,36 +22,27 @@ import javax.inject.Inject
 @AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
     private val noteViewModel by viewModels<NoteViewModel>()
+
     @Inject
     lateinit var exporter: Exporter
+
     @Inject
     lateinit var fileName: String
+    private val navController by lazy {
+        findNavController(R.id.fragmentNavHost)
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         setupActionBar()
         setOnDestinationChange()
-        setupButtonsOnClick()
     }
 
     private fun setupActionBar() {
         setSupportActionBar(toolbar)
-        supportActionBar?.setDisplayShowTitleEnabled(false)
-        setupActionBarWithNavController(findNavController(R.id.fragmentNavHost))
-    }
-
-    private fun setupButtonsOnClick() {
-        imgDrawer.setOnClickListener {
-            drawerLayout.openDrawer(GravityCompat.START)
-        }
-
-        drawerMenuMain.setNavigationItemSelectedListener {
-            when (it.itemId) {
-                R.id.exportData -> startExportDataIntent()
-                R.id.importData -> startImportDataIntent()
-            }
-            true
-        }
+        toolbar.setupWithNavController(navController, drawerLayout)
+        drawerMenuMain.setupWithNavController(navController)
     }
 
     private fun startImportDataIntent() {
@@ -74,16 +63,9 @@ class MainActivity : AppCompatActivity() {
 
     private fun setOnDestinationChange() {
         findNavController(R.id.fragmentNavHost).addOnDestinationChangedListener { _, destination, _ ->
-            toolbarTitle.text = destination.label
             when (destination.id) {
-                R.id.addNoteFragment -> {
-                    drawerLayout?.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED)
-                        .also { imgDrawer.makeInvisible() }
-                }
-                else -> {
-                    drawerLayout?.setDrawerLockMode(DrawerLayout.LOCK_MODE_UNLOCKED)
-                        .also { imgDrawer.makeVisible() }
-                }
+                R.id.addNoteFragment -> drawerLayout?.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED)
+                else -> drawerLayout?.setDrawerLockMode(DrawerLayout.LOCK_MODE_UNLOCKED)
             }
         }
     }
@@ -108,7 +90,4 @@ class MainActivity : AppCompatActivity() {
             }
         }
     }
-
-    override fun onSupportNavigateUp() =
-        findNavController(R.id.fragmentNavHost).navigateUp() || super.onSupportNavigateUp()
 }

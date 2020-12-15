@@ -25,7 +25,6 @@ import kotlinx.android.synthetic.main.fragment_notes.*
 @AndroidEntryPoint
 class NotesFragment : Fragment(R.layout.fragment_notes), NoteAdapter.OnItemClickListener {
     private val noteViewModel: NoteViewModel by viewModels()
-    private lateinit var staggeredGrid: StaggeredGridLayoutManager
     private lateinit var noteAdapter: NoteAdapter
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -33,10 +32,6 @@ class NotesFragment : Fragment(R.layout.fragment_notes), NoteAdapter.OnItemClick
         setupRecyclerView()
         setupButtonsOnClick()
         setupObserver()
-        staggeredGrid = StaggeredGridLayoutManager(
-            1,
-            StaggeredGridLayoutManager.VERTICAL
-        )
         setHasOptionsMenu(true)
     }
 
@@ -49,7 +44,6 @@ class NotesFragment : Fragment(R.layout.fragment_notes), NoteAdapter.OnItemClick
 
     private fun setupRecyclerView() {
         noteAdapter = NoteAdapter(this)
-
         recyclerViewNotes.apply {
             adapter = noteAdapter
             setHasFixedSize(true)

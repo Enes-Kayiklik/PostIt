@@ -2,7 +2,6 @@ package com.eneskayiklik.post_it.ui.main.addnote
 
 import android.app.AlertDialog
 import android.os.Bundle
-import android.util.Log
 import android.view.Menu
 import android.view.MenuInflater
 import android.view.MenuItem
@@ -82,7 +81,6 @@ class AddNoteFragment : Fragment(R.layout.fragment_add_note), TodoListAdapter.On
                     }
                 }
                 todoListAdapter.notifyItemMoved(viewHolder.adapterPosition, target.adapterPosition)
-                Log.e("TAG  List -> ", "${todoList.joinToString { it.title }}")
                 return true
             }
 
@@ -103,10 +101,6 @@ class AddNoteFragment : Fragment(R.layout.fragment_add_note), TodoListAdapter.On
     private fun setupButtonsOnClick() {
         edtNoteTitle.doOnTextChanged { text, _, _, _ ->
             tvTitleLength.text = "${text?.length ?: 0}".plus(" / 15")
-        }
-
-        edtNote.doOnTextChanged { text, _, _, _ ->
-            //updateNote()
         }
 
         btnAddListItem.setOnClickListener {
@@ -131,7 +125,7 @@ class AddNoteFragment : Fragment(R.layout.fragment_add_note), TodoListAdapter.On
             this.requireActivity().onBackPressed()
             true
         } else {
-            Toast.makeText(this.requireContext(), "Input all require data", Toast.LENGTH_SHORT)
+            Toast.makeText(this.requireContext(), R.string.input_data_error, Toast.LENGTH_SHORT)
                 .show()
             false
         }

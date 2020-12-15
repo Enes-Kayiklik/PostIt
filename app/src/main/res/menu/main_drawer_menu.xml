@@ -1,5 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <group
+        android:id="@+id/GroupOne"
+        android:checkableBehavior="single">
+        <item
+            android:id="@+id/notesFragment"
+            android:title="Notes" />
+    </group>
+    <item
+        android:id="@+id/settingsFragment"
+        android:title="Settings" />
     <item
         android:id="@+id/exportData"
         android:title="@string/export_data" />
