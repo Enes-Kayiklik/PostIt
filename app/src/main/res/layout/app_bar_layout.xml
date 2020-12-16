@@ -12,7 +12,7 @@
             android:id="@+id/toolbar"
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
-            android:background="@color/colorWhite" />
+            android:background="@color/colorToolbarBack" />
     </com.google.android.material.appbar.AppBarLayout>
 
     <include layout="@layout/nav_host_fragment" />

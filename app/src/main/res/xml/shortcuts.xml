@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<shortcuts xmlns:android="http://schemas.android.com/apk/res/android">
+    <shortcut
+        android:enabled="true"
+        android:icon="@drawable/ic_add_dark"
+        android:shortcutId="newNote"
+        android:shortcutShortLabel="@string/add_note">
+        <intent
+            android:action="android.intent.action.VIEW"
+            android:data="myapp://main/addnote/add-note" />
+    </shortcut>
+</shortcuts>

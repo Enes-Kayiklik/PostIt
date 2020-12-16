@@ -6,7 +6,7 @@
 
     <fragment
         android:id="@+id/notesFragment"
-        android:name="com.eneskayiklik.post_it.ui.main.notes.NotesFragment"
+        android:name="com.eneskayiklik.postit.ui.main.notes.NotesFragment"
         android:label="Notes">
         <action
             android:id="@+id/action_notesFragment_to_addNoteFragment"
@@ -18,16 +18,20 @@
     </fragment>
     <fragment
         android:id="@+id/addNoteFragment"
-        android:name="com.eneskayiklik.post_it.ui.main.addnote.AddNoteFragment"
+        android:name="com.eneskayiklik.postit.ui.main.addnote.AddNoteFragment"
         android:label="Add Note">
         <argument
             android:name="currentNote"
             android:defaultValue="@null"
-            app:argType="com.eneskayiklik.post_it.db.entity.Note"
+            app:argType="com.eneskayiklik.postit.db.entity.Note"
             app:nullable="true" />
+        <deepLink
+            android:id="@+id/deepLink"
+            android:autoVerify="true"
+            app:uri="myapp://main/addnote/add-note" />
     </fragment>
     <fragment
         android:id="@+id/settingsFragment"
-        android:name="com.eneskayiklik.post_it.ui.settings.SettingsFragment"
+        android:name="com.eneskayiklik.postit.ui.settings.SettingsFragment"
         android:label="Settings" />
 </navigation>

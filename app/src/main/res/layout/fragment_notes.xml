@@ -18,8 +18,7 @@
         android:contentDescription="@string/app_name"
         android:src="@drawable/ic_add"
         android:backgroundTint="@color/colorAccent"
-        app:layout_behavior=".util.FabBehavior"
-        app:tint="@color/colorWhite" />
+        app:tint="@color/colorToolbarBack" />
 
     <include
         android:id="@+id/emptyNote"

@@ -4,6 +4,7 @@
     <string name="sort_by">Sort By</string>
     <string name="sort_by_date">Sort By Date</string>
     <string name="delete_all_notes">Delete All Notes</string>
+    <string name="add_note">New Note</string>
 
     <string name="note_hint">Note</string>
     <string name="title">Title</string>
