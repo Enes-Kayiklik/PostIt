@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Post-it</string>
+    <string name="app_name">Post It</string>
 
     <string name="sort_by">Sort By</string>
     <string name="sort_by_date">Sort By Date</string>
@@ -7,8 +7,8 @@
 
     <string name="note_hint">Note</string>
     <string name="title">Title</string>
-
     <string name="notes">Notes</string>
+    <string name="settings">Settings</string>
     <string name="save">Save</string>
     <string name="search">Search</string>
     <string name="change_note_type">Change note type</string>
@@ -26,4 +26,25 @@
     <string name="import_data">Import Data</string>
     <string name="export_file_name">Export Backup.json</string>
     <string name="input_data_error">Input all require data</string>
+
+    <string name="app_settings">App Settings</string>
+    <string name="language">Language</string>
+    <string name="dark_mode">Dark Mode</string>
+    <string name="data">Data</string>
+    <string name="export_note">Export Note Data</string>
+    <string name="import_note">Import Note Data</string>
+    <string name="about">About</string>
+    <string name="send_feedback">Send Feedback</string>
+    <string name="share_this_app">Share This App</string>
+    <string name="rate_this_app">Rate This App</string>
+    <string name="contact_us">Contact Us</string>
+
+    <string name="import_key">import_key</string>
+    <string name="export_key">export_key</string>
+    <string name="send_feedback_key">send_feedback_key</string>
+    <string name="share_this_app_key">share_this_app_key</string>
+    <string name="rate_this_app_key">rate_this_app_key</string>
+    <string name="language_key">language_key</string>
+    <string name="dark_mode_key">dark_mode_key</string>
+    <string name="contact_us_key">contact_us_key</string>
 </resources>

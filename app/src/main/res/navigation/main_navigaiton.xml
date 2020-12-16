@@ -29,5 +29,5 @@
     <fragment
         android:id="@+id/settingsFragment"
         android:name="com.eneskayiklik.post_it.ui.settings.SettingsFragment"
-        android:label="SettingsFragment" />
+        android:label="Settings" />
 </navigation>

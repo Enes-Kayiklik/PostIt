@@ -9,13 +9,17 @@ import com.google.gson.reflect.TypeToken
 import java.io.File
 
 class Exporter(
-    private val context: Context
+    private val context: Context,
+    private val fileName: String
 ) {
     companion object {
         private val todoExportType = object : TypeToken<List<Note>>() {}.type
     }
 
-    fun exportData(uri: Uri, note: List<Note>, fileName: String) {
+    val name: String
+        get() = fileName
+
+    fun exportData(uri: Uri, note: List<Note>) {
         File(getExportedPath(), fileName).apply {
             appendText(note.toJson())
             writeFile(uri, this)

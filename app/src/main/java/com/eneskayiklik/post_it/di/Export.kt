@@ -17,8 +17,9 @@ object Export {
     @Provides
     @Singleton
     fun provideExporter(
-        @ApplicationContext context: Context
-    ): Exporter = Exporter(context)
+        @ApplicationContext context: Context,
+        fileName: String
+    ): Exporter = Exporter(context, fileName)
 
     @Provides
     fun providesRes(

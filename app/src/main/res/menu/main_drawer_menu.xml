@@ -5,17 +5,15 @@
         android:checkableBehavior="single">
         <item
             android:id="@+id/notesFragment"
-            android:title="Notes" />
+            android:icon="@drawable/ic_note"
+            android:title="@string/notes" />
     </group>
-    <item
-        android:id="@+id/settingsFragment"
-        android:title="Settings" />
-    <item
-        android:id="@+id/exportData"
-        android:title="@string/export_data" />
-
-    <item
-        android:id="@+id/importData"
-        android:title="@string/import_data" />
-
+    <group
+        android:id="@+id/GroupTwo"
+        android:checkableBehavior="single">
+        <item
+            android:id="@+id/settingsFragment"
+            android:icon="@drawable/ic_settings"
+            android:title="@string/settings" />
+    </group>
 </menu>
