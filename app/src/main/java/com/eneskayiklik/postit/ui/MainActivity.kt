@@ -5,7 +5,9 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.navigation.findNavController
 import androidx.navigation.ui.setupWithNavController
+import androidx.preference.PreferenceManager
 import com.eneskayiklik.postit.R
+import com.eneskayiklik.postit.util.ContextUtils
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.app_bar_layout.*
@@ -19,6 +21,7 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        setupLanguage()
         setContentView(R.layout.activity_main)
         setupActionBar()
         setOnDestinationChange()
@@ -36,6 +39,15 @@ class MainActivity : AppCompatActivity() {
                 R.id.addNoteFragment -> drawerLayout?.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED)
                 else -> drawerLayout?.setDrawerLockMode(DrawerLayout.LOCK_MODE_UNLOCKED)
             }
+        }
+    }
+
+    private fun setupLanguage() {
+        val language = PreferenceManager.getDefaultSharedPreferences(this)
+            .getString(this.getString(R.string.language_key), "")
+        when (language) {
+            "Türkçe" -> ContextUtils.changeLanguage("tr", this)
+            "English" -> ContextUtils.changeLanguage("en", this)
         }
     }
 }

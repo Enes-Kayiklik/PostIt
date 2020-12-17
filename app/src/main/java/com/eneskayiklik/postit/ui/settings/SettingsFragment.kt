@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
+import androidx.preference.DropDownPreference
 import androidx.preference.Preference
 import androidx.preference.PreferenceFragmentCompat
 import androidx.preference.SwitchPreference
@@ -13,6 +14,7 @@ import com.eneskayiklik.postit.R
 import com.eneskayiklik.postit.helper.Exporter
 import com.eneskayiklik.postit.ui.main.notes.NoteViewModel
 import com.eneskayiklik.postit.util.Constants
+import com.eneskayiklik.postit.util.ContextUtils.Companion.changeLanguage
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
@@ -27,6 +29,7 @@ class SettingsFragment : PreferenceFragmentCompat() {
         val importData: Preference? = findPreference(this.getString(R.string.import_key))
         val darkModeSwitch: SwitchPreference? =
             findPreference(this.getString(R.string.dark_mode_key))
+        val language: DropDownPreference? = findPreference(this.getString(R.string.language_key))
 
         exportData?.setOnPreferenceClickListener {
             startExportDataIntent()
@@ -46,7 +49,23 @@ class SettingsFragment : PreferenceFragmentCompat() {
             }
             true
         }*/
+
+        language?.setOnPreferenceChangeListener { _, newValue ->
+            when (newValue) {
+                "Türkçe" -> changeLanguage(
+                    "tr",
+                    this.requireContext()
+                ).also { this.requireActivity().recreate() }
+                "English" -> changeLanguage(
+                    "en",
+                    this.requireContext()
+                ).also { this.requireActivity().recreate() }
+            }
+            true
+        }
+
     }
+
 
     private fun startImportDataIntent() {
         Intent(Intent.ACTION_GET_CONTENT).apply {

@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Post It</string>
+
+    <string name="sort_by">Sırala</string>
+    <string name="sort_by_date">Tarihe Göre Sırala</string>
+    <string name="delete_all_notes">Tüm Notları Sil</string>
+    <string name="add_note">Yeni Not</string>
+
+    <string name="note_hint">Not</string>
+    <string name="title">Başlık</string>
+    <string name="notes">Notlar</string>
+    <string name="settings">Ayarlar</string>
+    <string name="save">Kaydet</string>
+    <string name="search">Notları Ara</string>
+    <string name="change_note_type">Not tipini değiştir</string>
+
+    <string name="empty_note_text">Boş!\nŞu anda hiçbir not bulunmamakta.</string>
+    <string name="delete">Sil</string>
+    <string name="yes">Evet</string>
+    <string name="no">Hayır</string>
+    <string name="delete_all_notes_text">Tüm notları silmek istediğinden emin misin ?</string>
+    <string name="delete_note_text">Gerçekten silmek istiyor musun ?</string>
+    <string name="undo">Geri Al</string>
+    <string name="deleted_successful">Baraşıyla Silindi</string>
+
+    <string name="export_data">Dışa Aktar</string>
+    <string name="import_data">İçe Aktar</string>
+    <string name="export_file_name">Export Backup.json</string>
+    <string name="input_data_error">Tüm alanları doldurunuz</string>
+
+    <string name="app_settings">Uygulama Ayarları</string>
+    <string name="language">Dil</string>
+    <string name="dark_mode">Karanlık Mod</string>
+    <string name="data">Veri</string>
+    <string name="export_note">Dışa Aktar</string>
+    <string name="import_note">İçe Aktar</string>
+    <string name="about">Hakkında</string>
+    <string name="send_feedback">Geri Bildirim Gönder</string>
+    <string name="share_this_app">Paylaşın</string>
+    <string name="rate_this_app">Uygulamayı Puanlayın</string>
+    <string name="contact_us">Bize Ulaşın</string>
+
+    <string name="import_key">import_key</string>
+    <string name="export_key">export_key</string>
+    <string name="send_feedback_key">send_feedback_key</string>
+    <string name="share_this_app_key">share_this_app_key</string>
+    <string name="rate_this_app_key">rate_this_app_key</string>
+    <string name="language_key">language_key</string>
+    <string name="dark_mode_key">dark_mode_key</string>
+    <string name="contact_us_key">contact_us_key</string>
+</resources>
