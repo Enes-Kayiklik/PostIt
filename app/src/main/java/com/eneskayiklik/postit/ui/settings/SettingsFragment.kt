@@ -9,7 +9,6 @@ import androidx.lifecycle.Observer
 import androidx.preference.DropDownPreference
 import androidx.preference.Preference
 import androidx.preference.PreferenceFragmentCompat
-import androidx.preference.SwitchPreference
 import com.eneskayiklik.postit.R
 import com.eneskayiklik.postit.helper.Exporter
 import com.eneskayiklik.postit.ui.main.notes.NoteViewModel
@@ -27,8 +26,8 @@ class SettingsFragment : PreferenceFragmentCompat() {
         super.onViewCreated(view, savedInstanceState)
         val exportData: Preference? = findPreference(this.getString(R.string.export_key))
         val importData: Preference? = findPreference(this.getString(R.string.import_key))
-        val darkModeSwitch: SwitchPreference? =
-            findPreference(this.getString(R.string.dark_mode_key))
+        /*val darkModeSwitch: SwitchPreference? =
+            findPreference(this.getString(R.string.dark_mode_key))*/
         val language: DropDownPreference? = findPreference(this.getString(R.string.language_key))
 
         exportData?.setOnPreferenceClickListener {
@@ -64,6 +63,25 @@ class SettingsFragment : PreferenceFragmentCompat() {
             true
         }
 
+        findPreference<Preference?>(resources.getString(R.string.share_this_app_key))?.setOnPreferenceClickListener {
+            Intent(Intent.ACTION_SEND).apply {
+                putExtra(Intent.EXTRA_TEXT, resources.getString(R.string.share_text))
+                type = "text/plain"
+                startActivity(this)
+            }
+            true
+        }
+
+        findPreference<Preference?>(resources.getString(R.string.contact_us_key))?.setOnPreferenceClickListener {
+            startSendEmailIntent()
+            true
+        }
+
+        findPreference<Preference?>(resources.getString(R.string.send_feedback_key))?.setOnPreferenceClickListener {
+            startSendEmailIntent()
+            true
+        }
+
     }
 
 
@@ -80,6 +98,14 @@ class SettingsFragment : PreferenceFragmentCompat() {
             addCategory(Intent.CATEGORY_OPENABLE)
             putExtra(Intent.EXTRA_TITLE, exporter.name)
             startActivityForResult(this, Constants.WRITE_INTENT)
+        }
+    }
+
+    private fun startSendEmailIntent() {
+        Intent(Intent.ACTION_SEND).apply {
+            putExtra(Intent.EXTRA_EMAIL, arrayOf(getString(R.string.support_mail)))
+            type = "message/rfc822"
+            startActivity(this)
         }
     }
 

@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Post It</string>
+    <string name="app_name">Noter</string>
 
     <string name="sort_by">Sort By</string>
     <string name="sort_by_date">Sort By Date</string>
@@ -48,4 +48,8 @@
     <string name="language_key">language_key</string>
     <string name="dark_mode_key">dark_mode_key</string>
     <string name="contact_us_key">contact_us_key</string>
+    <string name="add_list_item">Add List Item</string>
+
+    <string name="share_text">"I found a brilliant note app called Noter. You can download from this link: "</string>
+    <string name="support_mail">eneskayiklik@gmail.com</string>
 </resources>

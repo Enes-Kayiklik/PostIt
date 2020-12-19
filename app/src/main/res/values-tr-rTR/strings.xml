@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">Post It</string>
+    <string name="app_name">Noter</string>
 
     <string name="sort_by">Sırala</string>
     <string name="sort_by_date">Tarihe Göre Sırala</string>
@@ -20,7 +20,7 @@
     <string name="yes">Evet</string>
     <string name="no">Hayır</string>
     <string name="delete_all_notes_text">Tüm notları silmek istediğinden emin misin ?</string>
-    <string name="delete_note_text">Gerçekten silmek istiyor musun ?</string>
+    <string name="delete_note_text">Gerçekten bu notu silmek istiyor musun</string>
     <string name="undo">Geri Al</string>
     <string name="deleted_successful">Baraşıyla Silindi</string>
 
@@ -49,4 +49,8 @@
     <string name="language_key">language_key</string>
     <string name="dark_mode_key">dark_mode_key</string>
     <string name="contact_us_key">contact_us_key</string>
+    <string name="add_list_item">Listeye Eleman Ekle</string>
+
+    <string name="share_text">"I found a brilliant note app called Noter. You can download from this link: "</string>
+    <string name="support_mail">eneskayiklik@gmail.com</string>
 </resources>

@@ -8,6 +8,9 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.eneskayiklik.postit.R
 import com.eneskayiklik.postit.db.entity.Note
+import com.eneskayiklik.postit.util.advancedSubList
+import com.eneskayiklik.postit.util.makeInvisible
+import com.eneskayiklik.postit.util.makeVisible
 import kotlinx.android.synthetic.main.one_row_note.view.*
 
 class NoteAdapter(
@@ -53,6 +56,13 @@ class NoteAdapter(
             itemView.apply {
                 tvDesc.text = note.description
                 tvTitle.text = note.title
+                if (note.todoList.isNotEmpty()) {
+                    tvDesc.makeInvisible()
+                    recyclerViewSmallTodoList.apply {
+                        makeVisible()
+                        adapter = SmallCheckAdapter(note.todoList.advancedSubList(0, 4))
+                    }
+                }
             }
         }
     }

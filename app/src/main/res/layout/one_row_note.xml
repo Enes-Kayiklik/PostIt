@@ -1,33 +1,42 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_margin="8dp"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_marginStart="4dp"
+    android:layout_marginEnd="4dp"
     android:layout_marginTop="4dp"
     android:layout_marginBottom="4dp"
     android:background="@drawable/note_detail_background"
-    android:elevation="4dp"
-    android:padding="8dp">
+    android:elevation="4dp">
 
-    <TextView
-        android:id="@+id/tvTitle"
-        style="@style/TextStyle"
-        android:textColor="@color/colorOneNoteTitle"
-        android:textSize="16sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:paddingLeft="8dp"
+        android:paddingTop="4dp"
+        android:paddingRight="8dp"
+        android:paddingBottom="4dp">
 
-    <TextView
-        android:id="@+id/tvDesc"
-        style="@style/TextStyle"
-        android:layout_marginTop="8dp"
-        android:ellipsize="end"
-        android:maxLines="7"
-        android:textColor="@color/colorText"
-        android:textSize="14sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tvTitle" />
-</androidx.constraintlayout.widget.ConstraintLayout>
+        <TextView
+            android:id="@+id/tvTitle"
+            style="@style/OneRowNoteTitleTextStyle"
+            android:layout_width="match_parent" />
+
+        <TextView
+            android:id="@+id/tvDesc"
+            style="@style/OneRowNoteSubTextStyle"
+            android:layout_width="match_parent"
+            android:layout_marginTop="8dp" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recyclerViewSmallTodoList"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:clickable="false"
+            android:visibility="gone"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
+    </LinearLayout>
+</androidx.cardview.widget.CardView>

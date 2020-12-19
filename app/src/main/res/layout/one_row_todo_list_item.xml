@@ -19,21 +19,13 @@
 
     <EditText
         android:id="@+id/edtTodoTitle"
+        style="@style/ListItemEditTextStyle"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@null"
-        android:ems="10"
         android:hint="@string/title"
-        android:inputType="textPersonName"
-        android:maxLength="20"
-        android:textSize="16sp"
-        app:layout_constraintBottom_toBottomOf="@+id/checkBox"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/checkBox"
-        app:layout_constraintTop_toTopOf="@+id/checkBox"
-        android:textColor="@color/colorText"
         android:layout_weight="2"
-        app:layout_constraintVertical_bias="1.0" />
+        android:maxLength="20"
+        android:ems="10" />
 
     <ImageView
         android:id="@+id/btnHandleDrag"

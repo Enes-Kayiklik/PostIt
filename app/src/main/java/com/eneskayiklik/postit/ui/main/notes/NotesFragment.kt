@@ -100,7 +100,7 @@ class NotesFragment : Fragment(R.layout.fragment_notes), NoteAdapter.OnItemClick
     override fun onItemLongClicked(note: Note) {
         AlertDialog.Builder(this.requireContext())
             .setTitle(R.string.delete)
-            .setMessage(resources.getString(R.string.delete_note_text).plus(" '${note.title} ?"))
+            .setMessage(resources.getString(R.string.delete_note_text).plus(" '${note.title}' ?"))
             .setPositiveButton(R.string.yes) { _, _ ->
                 noteViewModel.deleteNote(note)
                 showSnackbar(note)

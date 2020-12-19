@@ -7,7 +7,7 @@
     <fragment
         android:id="@+id/notesFragment"
         android:name="com.eneskayiklik.postit.ui.main.notes.NotesFragment"
-        android:label="Notes">
+        android:label="@string/notes">
         <action
             android:id="@+id/action_notesFragment_to_addNoteFragment"
             app:destination="@id/addNoteFragment"
@@ -19,7 +19,7 @@
     <fragment
         android:id="@+id/addNoteFragment"
         android:name="com.eneskayiklik.postit.ui.main.addnote.AddNoteFragment"
-        android:label="Add Note">
+        android:label="@string/add_note">
         <argument
             android:name="currentNote"
             android:defaultValue="@null"
@@ -27,11 +27,10 @@
             app:nullable="true" />
         <deepLink
             android:id="@+id/deepLink"
-            android:autoVerify="true"
             app:uri="myapp://main/addnote/add-note" />
     </fragment>
     <fragment
         android:id="@+id/settingsFragment"
         android:name="com.eneskayiklik.postit.ui.settings.SettingsFragment"
-        android:label="Settings" />
+        android:label="@string/settings" />
 </navigation>

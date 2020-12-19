@@ -22,6 +22,10 @@ inline fun SearchView.onQueryTextChanged(crossinline listener: (String) -> Unit)
     })
 }
 
+fun <T> List<T>.advancedSubList(fromIndex: Int, toIndex: Int) =
+    if (this.size > toIndex) this.subList(fromIndex, toIndex) else this
+
+
 fun LayoutType.changeLayoutType() =
     if (this == LayoutType.NOTE) LayoutType.LIST else LayoutType.NOTE
 
