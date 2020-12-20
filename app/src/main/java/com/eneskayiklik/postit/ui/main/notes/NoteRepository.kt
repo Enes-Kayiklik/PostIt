@@ -1,6 +1,6 @@
 package com.eneskayiklik.postit.ui.main.notes
 
-import com.eneskayiklik.postit.db.NoteDao
+import com.eneskayiklik.postit.db.dao.NoteDao
 import com.eneskayiklik.postit.db.entity.Note
 import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject

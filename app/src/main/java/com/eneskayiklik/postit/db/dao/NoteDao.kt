@@ -1,4 +1,4 @@
-package com.eneskayiklik.postit.db
+package com.eneskayiklik.postit.db.dao
 
 import androidx.room.*
 import com.eneskayiklik.postit.db.entity.Note

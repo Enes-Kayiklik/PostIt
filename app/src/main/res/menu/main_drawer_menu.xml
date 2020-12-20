@@ -7,6 +7,10 @@
             android:id="@+id/notesFragment"
             android:icon="@drawable/ic_note"
             android:title="@string/notes" />
+        <item
+            android:id="@+id/birthdayFragment"
+            android:icon="@drawable/ic_birthday"
+            android:title="@string/birthday" />
     </group>
     <group
         android:id="@+id/GroupTwo"

@@ -33,4 +33,16 @@
         android:id="@+id/settingsFragment"
         android:name="com.eneskayiklik.postit.ui.settings.SettingsFragment"
         android:label="@string/settings" />
+    <fragment
+        android:id="@+id/birthdayFragment"
+        android:name="com.eneskayiklik.postit.ui.birthday.BirthdayFragment"
+        android:label="@string/birthday">
+        <action
+            android:id="@+id/action_birthdayFragment_to_addBirthdayFragment"
+            app:destination="@id/addBirthdayFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/addBirthdayFragment"
+        android:name="com.eneskayiklik.postit.ui.birthday.add.AddBirthdayFragment"
+        android:label="@string/add_birthday" />
 </navigation>
