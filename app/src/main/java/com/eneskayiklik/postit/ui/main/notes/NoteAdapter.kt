@@ -33,7 +33,7 @@ class NoteAdapter(
 
         init {
             itemView.apply {
-                rootView.setOnLongClickListener {
+                view.setOnLongClickListener {
                     val position = adapterPosition
                     if (position != RecyclerView.NO_POSITION) {
                         val note = getItem(position)
@@ -42,7 +42,7 @@ class NoteAdapter(
                     true
                 }
 
-                rootView.setOnClickListener {
+                view.setOnClickListener {
                     val position = adapterPosition
                     if (position != RecyclerView.NO_POSITION) {
                         val note = getItem(position)

@@ -190,4 +190,9 @@ class AddNoteFragment : Fragment(R.layout.fragment_add_note), TodoListAdapter.On
         if (todoList.isNotEmpty())
             todoList[position].isDone = isChecked
     }
+
+    override fun onPause() {
+        super.onPause()
+        parentLayout.clearFocus()
+    }
 }
