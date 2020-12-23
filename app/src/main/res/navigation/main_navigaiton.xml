@@ -34,15 +34,15 @@
         android:name="com.eneskayiklik.postit.ui.settings.SettingsFragment"
         android:label="@string/settings" />
     <fragment
-        android:id="@+id/birthdayFragment"
-        android:name="com.eneskayiklik.postit.ui.birthday.BirthdayFragment"
-        android:label="@string/birthday">
+        android:id="@+id/reminderFragment"
+        android:name="com.eneskayiklik.postit.ui.reminder.ReminderFragment"
+        android:label="@string/reminder">
         <action
             android:id="@+id/action_birthdayFragment_to_addBirthdayFragment"
-            app:destination="@id/addBirthdayFragment" />
+            app:destination="@id/addReminderFragment" />
     </fragment>
     <fragment
-        android:id="@+id/addBirthdayFragment"
-        android:name="com.eneskayiklik.postit.ui.birthday.add.AddBirthdayFragment"
-        android:label="@string/add_birthday" />
+        android:id="@+id/addReminderFragment"
+        android:name="com.eneskayiklik.postit.ui.reminder.add.AddReminderFragment"
+        android:label="@string/add_reminder" />
 </navigation>

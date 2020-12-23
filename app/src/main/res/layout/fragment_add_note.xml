@@ -92,7 +92,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/add_list_item"
-        android:textColor="@color/colorText"
+        android:textColor="@color/colorPrimary"
         android:visibility="invisible"
         app:layout_constraintBottom_toBottomOf="@+id/tvDate"
         app:layout_constraintEnd_toEndOf="@+id/edtNoteTitle"

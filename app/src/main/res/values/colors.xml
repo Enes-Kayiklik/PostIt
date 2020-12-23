@@ -12,4 +12,7 @@
     <color name="colorOneNoteBack">#FFF</color>
     <color name="colorOneNoteTitle">#000</color>
     <color name="colorToolbarBack">#FFF</color>
+    <color name="colorWhiteText">#FFF</color>
+    <color name="colorAddBirthdayBack">#FBFBFB</color>
+    <color name="colorBirthdayEdtBack">#F8F2FF</color>
 </resources>

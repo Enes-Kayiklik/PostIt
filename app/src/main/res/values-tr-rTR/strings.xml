@@ -10,8 +10,8 @@
     <string name="note_hint">Not</string>
     <string name="title">Başlık</string>
     <string name="notes">Notlar</string>
-    <string name="birthday">Doğum Günü</string>
-    <string name="add_birthday">Doğum Günü Ekle</string>
+    <string name="reminder">Hatırlatıcı</string>
+    <string name="add_reminder">Hatırlatıcı Ekle</string>
     <string name="settings">Ayarlar</string>
     <string name="save">Kaydet</string>
     <string name="search">Notları Ara</string>

@@ -64,7 +64,7 @@ class SettingsFragment : PreferenceFragmentCompat() {
         }
 
         findPreference<Preference?>(resources.getString(R.string.share_this_app_key))?.setOnPreferenceClickListener {
-            Intent(Intent.ACTION_SEND).apply {
+            Intent(Intent.ACTION_SENDTO).apply {
                 putExtra(Intent.EXTRA_TEXT, resources.getString(R.string.share_text))
                 type = "text/plain"
                 startActivity(this)

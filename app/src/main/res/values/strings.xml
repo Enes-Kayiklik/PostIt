@@ -9,8 +9,8 @@
     <string name="note_hint">Note</string>
     <string name="title">Title</string>
     <string name="notes">Notes</string>
-    <string name="birthday">Birthday</string>
-    <string name="add_birthday">Add Birthday</string>
+    <string name="reminder">Reminder</string>
+    <string name="add_reminder">Add Reminder</string>
     <string name="settings">Settings</string>
     <string name="save">Save</string>
     <string name="search">Search</string>

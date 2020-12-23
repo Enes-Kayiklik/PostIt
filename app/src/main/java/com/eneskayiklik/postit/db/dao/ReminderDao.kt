@@ -4,14 +4,14 @@ import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
-import com.eneskayiklik.postit.db.entity.Birthday
+import com.eneskayiklik.postit.db.entity.Reminder
 import kotlinx.coroutines.flow.Flow
 
 @Dao
-interface BirthdayDao {
+interface ReminderDao {
     @Query("Select * From birthday")
-    fun getAllBirthday(): Flow<List<Birthday>>
+    fun getAllBirthday(): Flow<List<Reminder>>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun addBirthday(data: Birthday)
+    fun addBirthday(data: Reminder)
 }
