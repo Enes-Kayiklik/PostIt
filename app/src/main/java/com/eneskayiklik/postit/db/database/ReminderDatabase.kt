@@ -17,6 +17,6 @@ abstract class ReminderDatabase : RoomDatabase() {
     abstract fun getDao(): ReminderDao
 
     companion object {
-        const val DATABASE_NAME = "birthdays.db"
+        const val DATABASE_NAME = "reminder.db"
     }
 }

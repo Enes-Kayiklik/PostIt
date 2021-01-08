@@ -1,23 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerViewReminders"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
+        android:layout_height="match_parent" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/btnAddBirthday"
+        android:id="@+id/btnAddReminder"
         style="@style/AddNoteFabStyle"
         android:layout_gravity="end|bottom"
         android:layout_margin="@dimen/margin_fab"
         android:contentDescription="@string/app_name" />
 
     <include
-        android:id="@+id/emptyBirthday"
+        android:id="@+id/emptyReminder"
         layout="@layout/empty_note_layout" />
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

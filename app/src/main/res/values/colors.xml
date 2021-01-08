@@ -15,4 +15,12 @@
     <color name="colorWhiteText">#FFF</color>
     <color name="colorAddBirthdayBack">#FBFBFB</color>
     <color name="colorBirthdayEdtBack">#F8F2FF</color>
+
+    <color name="colorNoteBackPink">#FFE7E9</color>
+    <color name="colorNoteBackYellow">#FFF7AA</color>
+    <color name="colorNoteBackBlue">#E8E8FF</color>
+    <color name="colorNoteBackPurple">#FFD9FE</color>
+    <color name="colorNoteBackOrange">#FFDAC5</color>
+    <color name="colorNoteBackCyan">#AAFFE1</color>
+    <color name="colorNoteBackRed">#FFAAAA</color>
 </resources>

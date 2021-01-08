@@ -1,11 +1,11 @@
 package com.eneskayiklik.postit.ui
 
 import android.os.Bundle
+import android.preference.PreferenceManager
 import androidx.appcompat.app.AppCompatActivity
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.navigation.findNavController
 import androidx.navigation.ui.setupWithNavController
-import androidx.preference.PreferenceManager
 import com.eneskayiklik.postit.R
 import com.eneskayiklik.postit.util.ContextUtils
 import dagger.hilt.android.AndroidEntryPoint

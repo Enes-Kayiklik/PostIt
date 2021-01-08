@@ -15,7 +15,11 @@ class ReminderViewModel @ViewModelInject constructor(
     private val _birthdays = reminderDao.getAllBirthday()
     val birthdays = _birthdays.asLiveData()
 
-    fun addBirthday(reminder: Reminder) = viewModelScope.launch(Dispatchers.IO) {
-        reminderDao.addBirthday(reminder)
+    fun addReminder(reminder: Reminder) = viewModelScope.launch(Dispatchers.IO) {
+        reminderDao.addReminder(reminder)
+    }
+
+    fun deleteAllReminders() = viewModelScope.launch(Dispatchers.IO) {
+        reminderDao.deleteAllReminders()
     }
 }

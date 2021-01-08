@@ -8,18 +8,28 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.eneskayiklik.postit.R
 import com.eneskayiklik.postit.db.entity.Reminder
-import com.eneskayiklik.postit.util.makeInvisible
+import com.eneskayiklik.postit.util.makeVisible
 import kotlinx.android.synthetic.main.one_row_reminder.view.*
 
-class ReminderAdapter :
+class ReminderAdapter(
+    val onClickFun: (Reminder) -> Unit
+) :
     ListAdapter<Reminder, ReminderAdapter.CustomViewHolder>(CustomCallBack()) {
 
     inner class CustomViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        fun bind(reminder: Reminder, position: Int) {
+        init {
+            itemView.rootView.setOnClickListener {
+                onClickFun(currentList[adapterPosition])
+            }
+        }
+
+        fun bind(reminder: Reminder) {
             itemView.apply {
-                textView.text = reminder.title
-                if (position == 0)
-                    separator.makeInvisible()
+                tvReminderTitle.text = reminder.title
+                tvReminderDetail.text = reminder.desc
+                rootView.setBackgroundColor(reminder.reminderColor)
+                if (reminder.isReminderActive)
+                    icIsReminderActive.makeVisible()
             }
         }
     }
@@ -38,6 +48,6 @@ class ReminderAdapter :
         )
 
     override fun onBindViewHolder(holder: CustomViewHolder, position: Int) {
-        holder.bind(getItem(position), position)
+        holder.bind(getItem(position))
     }
 }

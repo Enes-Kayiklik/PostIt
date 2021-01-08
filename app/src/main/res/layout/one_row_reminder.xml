@@ -1,65 +1,38 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="@color/colorOneNoteBack"
+    android:layout_marginStart="4dp"
+    android:layout_marginTop="8dp"
+    android:layout_marginEnd="4dp"
     android:padding="8dp"
-    tools:context=".ui.MainActivity">
+    android:background="@drawable/note_detail_background"
+    android:elevation="4dp"
+    android:orientation="vertical">
 
-    <View
-        android:id="@+id/separator"
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:background="@color/colorSeparator"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <com.mikhaellopez.circularimageview.CircularImageView
-        android:id="@+id/circularImageView"
-        android:layout_width="56dp"
-        android:layout_height="56dp"
-        android:layout_marginTop="8dp"
-        android:scaleType="centerCrop"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/separator" />
-
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:orientation="vertical"
-        app:layout_constraintBottom_toBottomOf="@+id/circularImageView"
-        app:layout_constraintStart_toEndOf="@+id/circularImageView"
-        app:layout_constraintTop_toTopOf="@+id/circularImageView">
+        android:layout_height="wrap_content">
 
         <TextView
-            android:id="@+id/textView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="TextView"
-            android:textColor="@color/colorPrimary"
-            android:textSize="16sp" />
+            android:id="@+id/tvReminderTitle"
+            style="@style/OneRowNoteTitleTextStyle"
+            android:layout_width="wrap_content" />
 
-        <TextView
-            android:id="@+id/textView2"
+        <ImageView
+            android:id="@+id/icIsReminderActive"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="4dp"
-            android:text="TextView"
-            android:textColor="@color/colorPrimary"
-            android:textSize="11sp" />
-    </LinearLayout>
+            android:layout_alignParentEnd="true"
+            android:rotation="30"
+            android:src="@drawable/ic_reminder"
+            android:visibility="gone" />
+    </RelativeLayout>
 
     <TextView
-        android:id="@+id/textView3"
+        android:id="@+id/tvReminderDetail"
+        style="@style/OneRowNoteSubTextStyle"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="TextView"
-        app:layout_constraintBottom_toBottomOf="@+id/circularImageView"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/circularImageView" />
-</androidx.constraintlayout.widget.ConstraintLayout>
+        android:layout_marginTop="4dp"
+        android:maxLines="7" />
+</LinearLayout>

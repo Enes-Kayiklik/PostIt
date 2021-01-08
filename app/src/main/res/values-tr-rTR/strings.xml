@@ -9,6 +9,7 @@
 
     <string name="note_hint">Not</string>
     <string name="title">Başlık</string>
+    <string name="detail">Detay</string>
     <string name="notes">Notlar</string>
     <string name="reminder">Hatırlatıcı</string>
     <string name="add_reminder">Hatırlatıcı Ekle</string>
@@ -16,6 +17,7 @@
     <string name="save">Kaydet</string>
     <string name="search">Notları Ara</string>
     <string name="change_note_type">Not tipini değiştir</string>
+    <string name="pick_color">Renk Belirle</string>
 
     <string name="empty_note_text">Boş!\nŞu anda hiçbir not bulunmamakta.</string>
     <string name="delete">Sil</string>

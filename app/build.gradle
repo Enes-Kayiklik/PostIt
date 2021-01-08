@@ -78,7 +78,7 @@ dependencies {
     implementation "androidx.recyclerview:recyclerview:1.1.0"
 
     // Room
-    def room_version = "2.2.5"
+    def room_version = "2.2.6"
     implementation "androidx.room:room-runtime:$room_version"
     kapt "androidx.room:room-compiler:$room_version"
     implementation "androidx.room:room-ktx:$room_version"
@@ -91,4 +91,7 @@ dependencies {
 
     // Circle image view
     implementation 'com.mikhaellopez:circularimageview:4.2.0'
+
+    // Color Picker
+    implementation "dev.sasikanth:colorsheet:1.0.1"
 }

@@ -38,11 +38,17 @@
         android:name="com.eneskayiklik.postit.ui.reminder.ReminderFragment"
         android:label="@string/reminder">
         <action
-            android:id="@+id/action_birthdayFragment_to_addBirthdayFragment"
+            android:id="@+id/action_reminderFragment_to_addReminderFragment"
             app:destination="@id/addReminderFragment" />
     </fragment>
     <fragment
         android:id="@+id/addReminderFragment"
         android:name="com.eneskayiklik.postit.ui.reminder.add.AddReminderFragment"
-        android:label="@string/add_reminder" />
+        android:label="@string/add_reminder">
+        <argument
+            android:name="currentReminder"
+            android:defaultValue="@null"
+            app:argType="com.eneskayiklik.postit.db.entity.Reminder"
+            app:nullable="true" />
+    </fragment>
 </navigation>

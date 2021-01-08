@@ -6,4 +6,15 @@
         android:icon="@drawable/ic_check"
         android:title="@string/save"
         app:showAsAction="always" />
+    <item
+        android:id="@+id/addReminder"
+        android:icon="@drawable/ic_reminder"
+        android:title="@string/save"
+        app:showAsAction="ifRoom" />
+
+    <item
+        android:id="@+id/addColor"
+        android:icon="@drawable/ic_palette"
+        android:title="@string/pick_color"
+        app:showAsAction="ifRoom" />
 </menu>

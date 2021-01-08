@@ -8,6 +8,7 @@
 
     <string name="note_hint">Note</string>
     <string name="title">Title</string>
+    <string name="detail">Detail</string>
     <string name="notes">Notes</string>
     <string name="reminder">Reminder</string>
     <string name="add_reminder">Add Reminder</string>
@@ -15,6 +16,7 @@
     <string name="save">Save</string>
     <string name="search">Search</string>
     <string name="change_note_type">Change note type</string>
+    <string name="pick_color">Pick Color</string>
 
     <string name="empty_note_text">Nothing!\nYour note list is empty.</string>
     <string name="delete">Delete</string>
