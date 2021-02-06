@@ -57,4 +57,8 @@
     <string name="share_text">"I found a brilliant note app called Noter. You can download from this link: "</string>
     <string name="support_mail">eneskayiklik@gmail.com</string>
 
+    <string name="take_note">Take Note</string>
+    <string name="record_voice">Record Voice</string>
+    <string name="take_photo">Take Photo</string>
+
 </resources>

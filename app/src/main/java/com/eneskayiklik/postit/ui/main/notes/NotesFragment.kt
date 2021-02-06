@@ -79,7 +79,7 @@ class NotesFragment : BaseFragment<FragmentNotesBinding>(R.menu.notes_fragment_m
     }
 
     private fun setupButtonsOnClick() {
-        binder.btnAddNote.setOnClickListener {
+        binder.faButton.btnAddNote.setOnClickListener {
             findNavController().navigate(R.id.action_notesFragment_to_addNoteFragment)
         }
     }
