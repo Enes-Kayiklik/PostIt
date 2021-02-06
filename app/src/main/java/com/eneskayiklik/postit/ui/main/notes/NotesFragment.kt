@@ -1,50 +1,50 @@
 package com.eneskayiklik.postit.ui.main.notes
 
 import android.app.AlertDialog
-import android.os.Bundle
 import android.view.Menu
 import android.view.MenuInflater
 import android.view.MenuItem
-import android.view.View
 import androidx.appcompat.widget.SearchView
 import androidx.coordinatorlayout.widget.CoordinatorLayout
-import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import com.eneskayiklik.postit.R
+import com.eneskayiklik.postit.base.BaseFragment
+import com.eneskayiklik.postit.databinding.FragmentNotesBinding
 import com.eneskayiklik.postit.db.entity.Note
-import com.eneskayiklik.postit.util.makeInvisible
-import com.eneskayiklik.postit.util.makeVisible
-import com.eneskayiklik.postit.util.onQueryTextChanged
+import com.eneskayiklik.postit.util.extensions.hide
+import com.eneskayiklik.postit.util.extensions.onQueryTextChanged
+import com.eneskayiklik.postit.util.extensions.show
 import com.google.android.material.snackbar.Snackbar
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.android.synthetic.main.fragment_notes.*
 
 @AndroidEntryPoint
-class NotesFragment : Fragment(R.layout.fragment_notes), NoteAdapter.OnItemClickListener {
+class NotesFragment : BaseFragment<FragmentNotesBinding>(R.menu.notes_fragment_menu),
+    NoteAdapter.OnItemClickListener {
     private val noteViewModel: NoteViewModel by viewModels()
     private lateinit var noteAdapter: NoteAdapter
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
+    override val layoutId: Int
+        get() = R.layout.fragment_notes
+
+    override fun initialize() {
         setupRecyclerView()
         setupButtonsOnClick()
         setupObserver()
-        setHasOptionsMenu(true)
     }
 
     private fun setupObserver() {
         noteViewModel.notes.observe(viewLifecycleOwner, Observer {
-            if (it.isEmpty()) emptyNote.makeVisible() else emptyNote.makeInvisible()
+            if (it.isEmpty()) binder.emptyNote.root.show() else binder.emptyNote.root.hide()
             noteAdapter.submitList(it)
         })
     }
 
     private fun setupRecyclerView() {
         noteAdapter = NoteAdapter(this)
-        recyclerViewNotes.apply {
+        binder.recyclerViewNotes.apply {
             adapter = noteAdapter
             setHasFixedSize(true)
             layoutManager = StaggeredGridLayoutManager(
@@ -79,7 +79,7 @@ class NotesFragment : Fragment(R.layout.fragment_notes), NoteAdapter.OnItemClick
     }
 
     private fun setupButtonsOnClick() {
-        btnAddNote.setOnClickListener {
+        binder.btnAddNote.setOnClickListener {
             findNavController().navigate(R.id.action_notesFragment_to_addNoteFragment)
         }
     }

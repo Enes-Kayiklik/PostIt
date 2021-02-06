@@ -15,7 +15,7 @@
         <activity
             android:name="com.eneskayiklik.postit.ui.MainActivity"
             android:windowSoftInputMode="adjustResize">
-            <nav-graph android:value="@navigation/main_navigaiton" />
+            <nav-graph android:value="@navigation/main_navigation" />
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />

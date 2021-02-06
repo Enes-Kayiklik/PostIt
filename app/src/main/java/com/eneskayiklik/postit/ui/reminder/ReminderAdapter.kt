@@ -8,7 +8,7 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.eneskayiklik.postit.R
 import com.eneskayiklik.postit.db.entity.Reminder
-import com.eneskayiklik.postit.util.makeVisible
+import com.eneskayiklik.postit.util.extensions.show
 import kotlinx.android.synthetic.main.one_row_reminder.view.*
 
 class ReminderAdapter(
@@ -29,7 +29,7 @@ class ReminderAdapter(
                 tvReminderDetail.text = reminder.desc
                 rootView.setBackgroundColor(reminder.reminderColor)
                 if (reminder.isReminderActive)
-                    icIsReminderActive.makeVisible()
+                    icIsReminderActive.show()
             }
         }
     }

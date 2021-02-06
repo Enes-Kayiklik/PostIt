@@ -1,21 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.coordinatorlayout.widget.CoordinatorLayout android:layout_width="match_parent"
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_height="match_parent">
+<layout>
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recyclerViewNotes"
+    <androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="match_parent">
 
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/btnAddNote"
-        style="@style/AddNoteFabStyle"
-        android:layout_gravity="end|bottom"
-        android:layout_margin="@dimen/margin_fab"
-        android:contentDescription="@string/app_name" />
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recyclerViewNotes"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
 
-    <include
-        android:id="@+id/emptyNote"
-        layout="@layout/empty_note_layout" />
-</androidx.coordinatorlayout.widget.CoordinatorLayout>
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/btnAddNote"
+            style="@style/AddNoteFabStyle"
+            android:layout_gravity="end|bottom"
+            android:layout_margin="@dimen/margin_fab"
+            android:contentDescription="@string/app_name" />
+
+        <include
+            android:id="@+id/emptyNote"
+            layout="@layout/empty_note_layout" />
+    </androidx.coordinatorlayout.widget.CoordinatorLayout>
+</layout>

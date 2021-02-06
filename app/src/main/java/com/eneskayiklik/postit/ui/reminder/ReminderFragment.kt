@@ -12,8 +12,8 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import com.eneskayiklik.postit.R
 import com.eneskayiklik.postit.db.entity.Reminder
-import com.eneskayiklik.postit.util.makeInvisible
-import com.eneskayiklik.postit.util.makeVisible
+import com.eneskayiklik.postit.util.extensions.hide
+import com.eneskayiklik.postit.util.extensions.show
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.fragment_reminder.*
 
@@ -50,8 +50,8 @@ class ReminderFragment : Fragment(R.layout.fragment_reminder) {
         reminderViewModel.birthdays.observe(this.viewLifecycleOwner, Observer {
             reminderAdapter.submitList(it)
             if (it.isNotEmpty())
-                emptyReminder.makeInvisible()
-            else emptyReminder.makeVisible()
+                emptyReminder.hide()
+            else emptyReminder.show()
         })
     }
 
